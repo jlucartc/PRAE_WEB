@@ -1,2 +1,2 @@
 # PRAE_WEB
-Aplicativo Web da PRAE
+Aplicativo Web da PRAE feito com Laravel.
