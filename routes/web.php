@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('login');
+})->name('index');
+
+Route::post('login','SiteController@login')->name('login');
+Route::get('logout','SiteController@logout')->name('logout');

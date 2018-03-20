@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDocumentosServicosTable extends Migration
+class CreateDescricoesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDocumentosServicosTable extends Migration
      */
     public function up()
     {
-        Schema::create('documentos_servicos', function (Blueprint $table) {
+        Schema::create('descricoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('servico_id');
-            $table->text('rota');
-            $table->text('nome');
+            $table->text('titulo');
+            $table->text('texto');
+            $table->integer('categoria_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateDocumentosServicosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documentos_servicos');
+        Schema::dropIfExists('descricoes');
     }
 }

@@ -3,19 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
-    public function telaCadastro(){
-
-        return view('cadastro');
-
-    }
-
-    public function cadastrar(Request $request){
-
-
-    }
 
     public function telaLogin(){
 
@@ -27,16 +20,16 @@ class SiteController extends Controller
 
       $request->validate([
 
-        'usuario' => 'required|unique:usuarios,usuario',
-        'senha' => 'required|min:6|max:50|confirmed',
+        'usuario' => 'required|exists:usuarios',
+        'senha' => 'required',
 
-      ])
+      ]);
 
       $user = User::where('usuario',$request->usuario)->first();
 
-      if( Hash::check($request->senha, Auth::user()->senha) ){
+      if( Hash::check($request->senha,$user->senha) ){
 
-         Auth::loginUsingId(Auth::user->id);
+         Auth::loginUsingId($user->id);
 
       }else{
 
@@ -44,13 +37,15 @@ class SiteController extends Controller
 
       }
 
+      return redirect()->route('index');
+
     }
 
     public function logout(){
 
       Auth::logout();
 
-      return redirect()->route('login');
+      return redirect()->route('index');
 
     }
 }
