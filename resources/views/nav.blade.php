@@ -12,7 +12,9 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-muted fixed-top">
   <a href="#" class='navbar-brand'> <img  width='40px' height='40px' src="{{ asset('ufc.png') }}" alt=""> </a>
   <div class="navbar-nav">
-    <a href="{{ route('logout') }}" class="nav-item nav-link">Logout</a>
+    <a href="{{ route('usuario.usuarios') }}" class="nav-item nav-link">Usuários</a>
+    <a href="{{ route('usuario.categorias') }}" class="nav-item nav-link">Categorias</a>
+    <a href="{{ route('logout') }}" class="nav-item nav-link ml-5">Logout</a>
   </div>
 </nav>
 @endif

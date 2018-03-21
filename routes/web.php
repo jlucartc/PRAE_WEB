@@ -17,3 +17,12 @@ Route::get('/', function () {
 
 Route::post('login','SiteController@login')->name('login');
 Route::get('logout','SiteController@logout')->name('logout');
+
+Route::prefix('usuario')->group(function(){
+
+  Route::get('usuarios','UsuariosController@usuarios')->name('usuario.usuarios');
+  Route::get('categorias','UsuariosController@categorias')->name('usuario.categorias');
+  Route::get('adicionarUsuario','UsuariosController@adicionarUsuario')->name('usuario.adicionarUsuario');
+  Route::get('adicionarCategoria','UsuariosController@adicionarCategoria')->name('usuario.adicionarCategoria');
+
+});

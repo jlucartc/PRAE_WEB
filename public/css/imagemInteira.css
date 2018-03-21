@@ -1,0 +1,8 @@
+.imagem-inteira {
+
+  background: url(http://localhost:8000/assistencia-estudantil.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+
+}

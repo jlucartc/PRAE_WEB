@@ -11,5 +11,13 @@ let mix = require('laravel-mix');
  |
  */
 
+ mix.styles([
+     'public/css/imagemInteira.css'
+ ], 'public/css/all.css');
+
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.scripts([
+       'fontawesome-free-5.0.8/svg-with-js/js/fontawesome.js',
+   ], 'public/js/all.js');
