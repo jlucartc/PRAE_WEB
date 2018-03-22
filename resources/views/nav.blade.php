@@ -1,5 +1,5 @@
 @if(!Auth::check())
-<nav class="navbar navbar-expand-sm navbar-light bg-muted sticky-top">
+<nav class="navbar navbar-expand-sm navbar-light bg-white sticky-top">
   <a href="#" class='navbar-brand'> <img  width='40px' height='40px' src="{{ asset('ufc.png') }}" alt=""> </a>
   <form class="form-inline mr-0 ml-5" action="{{ route('login')}}" method="post">
     {{ csrf_field() }}
@@ -9,7 +9,7 @@
   </form>
 </nav>
 @else
-<nav class="navbar navbar-expand-sm navbar-light bg-muted fixed-top">
+<nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
   <a href="#" class='navbar-brand'> <img  width='40px' height='40px' src="{{ asset('ufc.png') }}" alt=""> </a>
   <div class="navbar-nav">
     <a href="{{ route('usuario.usuarios') }}" class="nav-item nav-link">Usuários</a>

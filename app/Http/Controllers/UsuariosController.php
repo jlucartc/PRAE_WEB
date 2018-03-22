@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Categorias;
+use App\Descricoes;
+use Illuminate\Support\Facades\Auth;
 
 class UsuariosController extends Controller
 {
@@ -34,6 +36,12 @@ class UsuariosController extends Controller
   public function adicionarCategoria(){
 
     return view('usuario.adicionarCategoria');
+
+  }
+
+  public function adicionarDescricao($id){
+
+    return view('usuario.adicionarDescricao',['id' => $id]);
 
   }
 
@@ -88,6 +96,53 @@ class UsuariosController extends Controller
     $categoria->save();
 
     return redirect()->route('usuario.categorias');
+
+  }
+
+  public function confirmarCadastroDescricao(Request $request){
+
+    $request->validate([
+
+      'titulo' => 'required|string',
+      'texto' => 'required|string',
+      'id' => 'required|integer'
+
+    ]);
+
+    $descricao = new Descricoes;
+
+    $descricao->titulo = $request->titulo;
+    $descricao->texto = $request->texto;
+    $descricao->categoria_id = $request->id;
+
+    $descricao->save();
+
+    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
+
+  }
+
+  public function verCategoria($id){
+
+    $categoria = Categorias::find($id);
+    $descricoes = Descricoes::where('categoria_id',$categoria->id)->get();
+
+    return view('usuario.verCategoria',['categoria' => $categoria,'descricoes' => $descricoes]);
+
+  }
+
+  public function verUsuario($id){
+
+    $usuario = User::find($id);
+
+    return view('usuario.verUsuario',['usuario' => $usuario]);
+
+  }
+
+  public function verDescricao($id){
+
+    $descricao = Descricoes::find($id);
+
+    return view('usuario.verDescricao',['descricao' => $descricao]);
 
   }
 
