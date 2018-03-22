@@ -24,10 +24,12 @@ Route::prefix('usuario')->group(function(){
   Route::get('categorias','UsuariosController@categorias')->name('usuario.categorias');
   Route::get('adicionarUsuario','UsuariosController@adicionarUsuario')->name('usuario.adicionarUsuario');
   Route::get('adicionarCategoria','UsuariosController@adicionarCategoria')->name('usuario.adicionarCategoria');
-  ROute::get('adicionarDescricao/{id}','UsuariosController@adicionarDescricao')->name('usuario.adicionarDescricao');
+  Route::get('adicionarDescricao/{id}','UsuariosController@adicionarDescricao')->name('usuario.adicionarDescricao');
+  Route::get('adicionarDocumento/{id}','UsuariosController@adicionarDocumento')->name('usuario.adicionarDocumento');
   Route::post('confirmarCadastroUsuario','UsuariosController@confirmarCadastroUsuario')->name('usuario.confirmarCadastroUsuario');
   Route::post('confirmarCadastroCategoria','UsuariosController@confirmarCadastroCategoria')->name('usuario.confirmarCadastroCategoria');
   Route::post('confirmarCadastroDescricao','UsuariosController@confirmarCadastroDescricao')->name('usuario.confirmarCadastroDescricao');
+  Route::post('confirmarCadastroDocumento','UsuariosController@confirmarCadastroDocumento')->name('usuario.confirmarCadastroDocumento');
   Route::get('verUsuario/{id}','UsuariosController@verUsuario')->name('usuario.verUsuario');
   Route::get('verCategoria/{id}','UsuariosController@verCategoria')->name('usuario.verCategoria');
   Route::get('verDescricao/{id}','UsuariosController@verDescricao')->name('usuario.verDescricao');
