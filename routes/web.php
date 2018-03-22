@@ -24,5 +24,9 @@ Route::prefix('usuario')->group(function(){
   Route::get('categorias','UsuariosController@categorias')->name('usuario.categorias');
   Route::get('adicionarUsuario','UsuariosController@adicionarUsuario')->name('usuario.adicionarUsuario');
   Route::get('adicionarCategoria','UsuariosController@adicionarCategoria')->name('usuario.adicionarCategoria');
+  Route::post('confirmarCadastroUsuario','UsuariosController@confirmarCadastroUsuario')->name('usuario.confirmarCadastroUsuario');
+  Route::post('confirmarCadastroCategoria','UsuariosController@confirmarCadastroCategoria')->name('usuario.confirmarCadastroCategoria');
+  Route::get('verUsuario/{id}','UsuariosController@verUsuario')->name('usuario.verUsuario');
+  Route::get('verCategoria/{id}','UsuariosController@verCategoria')->name('usuario.verCategoria');
 
 });

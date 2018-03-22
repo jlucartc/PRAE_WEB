@@ -12,7 +12,7 @@ PRAE - Categorias
     @if(!$categorias->isEmpty())
       <div class="list-group">
         @foreach($categorias as $categoria)
-          <a href="#" class="list-group-item list-group-action">{{ ucfirst($categoria->nome) }}</a>
+          <a href="#" class="list-group-item list-group-item-action border border-dark">{{ ucfirst($categoria->nome) }}</a>
         @endforeach
       </div>
     @else

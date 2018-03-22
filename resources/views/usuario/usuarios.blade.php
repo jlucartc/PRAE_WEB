@@ -12,7 +12,7 @@ PRAE - Usuários
     @if(!$usuarios->isEmpty())
       <div class="list-group">
         @foreach($usuarios as $usuario)
-          <a class="list-group-item list-group-item-action border border-dark">{{ ucfirst($usuario->nome) }}</a>
+          <a href="#" class="list-group-item list-group-item-action border border-dark">{{ ucfirst($usuario->nome) }}</a>
         @endforeach
       </div>
     @else
