@@ -171,4 +171,12 @@ class UsuariosController extends Controller
 
   }
 
+  public function baixarDocumento($id){
+
+    $documento = Documentos::find($id);
+
+    return response()->download(storage_path('app/documentos_prae').'/'.$documento->rota);
+
+  }
+
 }

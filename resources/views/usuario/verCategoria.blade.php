@@ -105,7 +105,7 @@ PRAE - Categoria
     @if( !$documentos->isEmpty() )
       <div class="list-group">
         @foreach( $documentos as $documento )
-          <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}<div class="d-inline float-right"> <button type="button" name="button" class="btn btn-success mr-2">Baixar arquivo</button> <button class="btn btn-danger" type="button" name="button">Apagar arquivo</button> </div> </a>
+          <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2">Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button">Apagar arquivo</button> </div>      </a>
         @endforeach
       </div>
     @else

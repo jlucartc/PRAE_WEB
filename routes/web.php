@@ -34,4 +34,6 @@ Route::prefix('usuario')->group(function(){
   Route::get('verCategoria/{id}','UsuariosController@verCategoria')->name('usuario.verCategoria');
   Route::get('verDescricao/{id}','UsuariosController@verDescricao')->name('usuario.verDescricao');
 
+  Route::get('baixarDocumento/{id}','UsuariosController@baixarDocumento')->name('usuario.baixarDocumento');
+
 });
