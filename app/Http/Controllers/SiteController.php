@@ -37,7 +37,7 @@ class SiteController extends Controller
 
       }
 
-      return redirect()->route('index');
+      return redirect()->route('usuario.categorias');
 
     }
 
@@ -48,5 +48,5 @@ class SiteController extends Controller
       return redirect()->route('index');
 
     }
-    
+
 }

@@ -15,7 +15,7 @@ class UsuariosController extends Controller
 
   public function usuarios(){
 
-    $usuarios = User::all();
+    $usuarios = User::where('id','!=',Auth::user()->id)->get();
 
     return view('usuario.usuarios',['usuarios' => $usuarios]);
 
@@ -168,6 +168,108 @@ class UsuariosController extends Controller
     $descricao = Descricoes::find($id);
 
     return view('usuario.verDescricao',['descricao' => $descricao]);
+
+  }
+
+  public function deletarCategoria(Request $request){
+
+    Categorias::find($request->id)->delete();
+
+    Documentos::where('categoria_id',$request->id)->get()->delete();
+
+    Descricoes::where('categoria_id',$request->id)->get()->delete();
+
+    return redirect()->route('usuario.categorias');
+
+  }
+
+  public function deletarDocumento(Request $request){
+
+    $doc = Documentos::find($request->id);
+
+    $categoriaId = $doc->categoria_id;
+
+    //dd(storage_path('app/documentos_prae').'/'.$doc->rota);
+
+    Storage::disk('documentos_prae')->delete('/'.$doc->rota);
+
+    $doc->delete();
+
+    return redirect()->route('usuario.verCategoria',['id' => $categoriaId]);
+
+  }
+
+  public function deletarUsuario(Request $request){
+
+    User::find($request->id)->delete();
+
+    return redirect()->route('usuario.usuarios');
+
+  }
+
+  public function deletarDescricao(Request $request){
+
+    $desc = Descricoes::find($request->id);
+
+    $categoriaId = $desc->categoria_id;
+
+    $desc->delete();
+
+    return redirect()->route('usuario.verCategoria',['id' => $categoriaId]);
+
+  }
+
+  public function salvarUsuario(Request $request){
+
+    $request->validate([
+
+      'nome' => 'required|string',
+      'email' => 'required|string',
+      'usuario' => 'required|string',
+      'senha' => 'required|confirmed'
+
+    ]);
+
+    $usuario = User::find($request->id);
+
+    $usuario->nome = $request->nome;
+    $usuario->email = $request->email;
+    $usuario->usuario = $request->usuario;
+    $usuario->senha = ($usuario->senha != $request->senha ) ? bcrypt($request->senha) : $usuario->senha;
+
+    $usuario->save();
+
+    return redirect()->route('usuario.usuarios');
+
+  }
+
+  public function salvarCategoria(Request $request){
+
+    $request->validate([
+
+      'nome' => 'required|string',
+      'responsavel' => 'required|string',
+      'email' => 'required|string',
+      'fone' => 'required|string',
+      'bairro' => 'required|string',
+      'rua' => 'required|string',
+      'numero' => 'required|string'
+
+    ]);
+
+    $categoria = Categorias::find($request->id);
+
+    $categoria->nome = $request->nome;
+    $categoria->responsavel = $request->responsavel;
+    $categoria->email = $request->email;
+    $categoria->fone = $request->bairro;
+    $categoria->bairro = $request->bairro;
+    $categoria->rua = $request->rua;
+    $categoria->numero = $request->numero;
+
+    $categoria->save();
+
+    return redirect()->route('usuario.categorias');
 
   }
 

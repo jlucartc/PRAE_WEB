@@ -19,5 +19,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.scripts([
-       'fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.js',
+       'fontawesome-free-5.0.8/svg-with-js/js/fontawesome-all.js','public/js/travas.js'
    ], 'public/js/all.js');

@@ -13,32 +13,32 @@ PRAE - Categoria
           <h2>{{ $categoria->nome }}</h2>
         </div>
         <div class="card-body">
-            <form class="form" action="#" method="post">
-
+            <form class="form" action="{{ route('usuario.salvarCategoria',['id' => $categoria->id]) }}" method="post">
+                {{ csrf_field() }}
                 Nome
                 <div class="input-group mb-3">
 
-                    <input class="form-control" type="text" name="" value="{{ $categoria->nome }}" readonly>
+                    <input id="campo-1" class="form-control" type="text" name="" value="{{ $categoria->nome }}" readonly>
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                      <button id="1" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span</button>
                     </div>
                 </div>
 
                 Responsável
                 <div class="input-group mb-3">
 
-                    <input class="form-control" type="text" name="" value="{{ $categoria->responsavel }}" readonly>
+                    <input id="campo-2" class="form-control" type="text" name="" value="{{ $categoria->responsavel }}" readonly>
                     <div class="input-group-append">
-                      <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                      <button id="2" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                     </div>
                 </div>
 
                 Email
                 <div class="input-group mb-3">
 
-                  <input class="form-control" type="text" name="" value="{{ $categoria->email }}" readonly>
+                  <input id="campo-3" class="form-control" type="text" name="" value="{{ $categoria->email }}" readonly>
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                    <button id="3" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -46,9 +46,9 @@ PRAE - Categoria
                 Fone
                 <div class="input-group mb-3">
 
-                  <input class="form-control" type="text" name="" value="{{ $categoria->fone }}" readonly>
+                  <input id="campo-4" class="form-control" type="text" name="" value="{{ $categoria->fone }}" readonly>
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                    <button id="4" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -56,9 +56,9 @@ PRAE - Categoria
                 Rua
                 <div class="input-group mb-3">
 
-                  <input class="form-control" type="text" name="" value="{{ $categoria->rua }}" readonly>
+                  <input id="campo-5" class="form-control" type="text" name="" value="{{ $categoria->rua }}" readonly>
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                    <button id="5" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -66,9 +66,9 @@ PRAE - Categoria
                 Número
                 <div class="input-group mb-3">
 
-                  <input class="form-control" type="text" name="" value="{{ $categoria->numero }}" readonly>
+                  <input id="campo-6" class="form-control" type="text" name="" value="{{ $categoria->numero }}" readonly>
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                    <button id="6" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -76,16 +76,32 @@ PRAE - Categoria
                 Bairro
                 <div class="input-group mb-3">
 
-                  <input class="form-control" type="text" name="" value="{{ $categoria->bairro }}" readonly>
+                  <input id="campo-7" class="form-control" type="text" name="" value="{{ $categoria->bairro }}" readonly>
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" name="button"><span class="fas fa-lock"></span></button>
+                    <button id="7" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
 
         </div>
         <div class="card-footer">
-            <button class="btn btn-success mr-2" type="button" name="button">Salvar mudanças</button><button class="btn btn-primary mr-2" type="button" name="button">Cancelar</button><button class="btn btn-danger" type="button" name="button">Apagar categoria</button>
+            <button class="btn btn-success mr-2" type="button" data-toggle="modal" data-target="#confirmarMudancas" name="button">Salvar mudanças</button><a href="{{ route('usuario.categorias') }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" name="button">Apagar categoria</button>
+            <div id="confirmarMudancas" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h3>Confirmar alterações</h3>
+                  </div>
+                  <div class="modal-body">
+                      Deseja salvar as alterações?
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-success mr-2" type="submit" name="button">Confirmar</button><button class="btn btn-danger" type="button" data-dismiss="modal" name="button">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             </form>
         </div>
     </div>
@@ -105,7 +121,25 @@ PRAE - Categoria
     @if( !$documentos->isEmpty() )
       <div class="list-group">
         @foreach( $documentos as $documento )
-          <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2">Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button">Apagar arquivo</button> </div>      </a>
+          <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2">Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoDocumento{{ $documento->id }}" >Apagar arquivo</button> </div>      </a>
+          <div class="modal fade" id="confirmarDelecaoDocumento{{ $documento->id }}">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                        <h3>Confirmar deleção de documento</h3>
+                      </div>
+                      <div class="modal-body">
+                          Deseja mesmo deletar o documento?
+                      </div>
+                      <div class="modal-footer">
+                        <form class="form" action="{{ route('usuario.deletarDocumento',['id' => $documento->id ]) }}" method="post">
+                              {{ csrf_field() }}
+                              <button type="submit" class="btn btn-success mr-2" name="button">Confirmar</button><button class="btn btn-danger" type="button" data-dismiss="modal" name="button">Cancelar</button>
+                        </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
         @endforeach
       </div>
     @else

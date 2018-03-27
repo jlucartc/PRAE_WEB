@@ -33,6 +33,13 @@ Route::prefix('usuario')->group(function(){
   Route::get('verUsuario/{id}','UsuariosController@verUsuario')->name('usuario.verUsuario');
   Route::get('verCategoria/{id}','UsuariosController@verCategoria')->name('usuario.verCategoria');
   Route::get('verDescricao/{id}','UsuariosController@verDescricao')->name('usuario.verDescricao');
+  Route::post('deletarUsuario','UsuariosController@deletarUsuario')->name('usuario.deletarUsuario');
+  Route::post('deletarCategoria','UsuariosController@deletarCategoria')->name('usuario.deletarCategoria');
+  Route::post('deletarDescricao','UsuariosController@deletarDescricao')->name('usuario.deletarDescricao');
+  Route::post('deletarDocumento','UsuariosController@deletarDocumento')->name('usuario.deletarDocumento');
+  Route::post('salvarUsuario','UsuariosController@salvarUsuario')->name('usuario.salvarUsuario');
+  Route::post('salvarCategoria','UsuariosController@salvarCategoria')->name('usuario.salvarCategoria');
+  Route::post('salvarDescricao','UsuariosController@salvarDescricao')->name('usuario.salvarDescricao');
 
   Route::get('baixarDocumento/{id}','UsuariosController@baixarDocumento')->name('usuario.baixarDocumento');
 
