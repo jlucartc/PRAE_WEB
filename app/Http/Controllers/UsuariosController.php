@@ -273,6 +273,27 @@ class UsuariosController extends Controller
 
   }
 
+  public function salvarDescricao(Request $request){
+
+    $request->validate([
+
+      'titulo' => 'required|string',
+      'texto' => 'required|string',
+
+    ]);
+
+    $descricao = Descricoes::find($request->id);
+
+    $descricao->titulo = $request->titulo;
+    $descricao->texto = $request->texto;
+
+    $descricao->save();
+
+    return redirect()->route('usuario.verCategoria',['id' => $descricao->id]);
+
+
+  }
+
   public function baixarDocumento($id){
 
     $documento = Documentos::find($id);

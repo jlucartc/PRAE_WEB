@@ -9,6 +9,13 @@ PRAE - Categoria
 <div class="row justify-content-center">
   <div class="mt-5 pt-5 col-sm-10 pb-5">
     <div class="card mb-5">
+        @if($errors->any())
+          @foreach($errors->all() as $error)
+            <div class="alert alert-warning">
+              {{ $error }}
+            </div>
+          @endforeach
+        @endif
         <div class="card-header">
           <h2>{{ $categoria->nome }}</h2>
         </div>
@@ -18,7 +25,7 @@ PRAE - Categoria
                 Nome
                 <div class="input-group mb-3">
 
-                    <input id="campo-1" class="form-control" type="text" name="" value="{{ $categoria->nome }}" readonly>
+                    <input id="campo-1" class="form-control" type="text" name="nome" value="{{ $categoria->nome }}" readonly>
                     <div class="input-group-append">
                       <button id="1" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span</button>
                     </div>
@@ -27,7 +34,7 @@ PRAE - Categoria
                 Responsável
                 <div class="input-group mb-3">
 
-                    <input id="campo-2" class="form-control" type="text" name="" value="{{ $categoria->responsavel }}" readonly>
+                    <input id="campo-2" class="form-control" type="text" name="responsavel" value="{{ $categoria->responsavel }}" readonly>
                     <div class="input-group-append">
                       <button id="2" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                     </div>
@@ -36,7 +43,7 @@ PRAE - Categoria
                 Email
                 <div class="input-group mb-3">
 
-                  <input id="campo-3" class="form-control" type="text" name="" value="{{ $categoria->email }}" readonly>
+                  <input id="campo-3" class="form-control" type="text" name="email" value="{{ $categoria->email }}" readonly>
                   <div class="input-group-append">
                     <button id="3" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
@@ -46,7 +53,7 @@ PRAE - Categoria
                 Fone
                 <div class="input-group mb-3">
 
-                  <input id="campo-4" class="form-control" type="text" name="" value="{{ $categoria->fone }}" readonly>
+                  <input id="campo-4" class="form-control" type="text" name="fone" value="{{ $categoria->fone }}" readonly>
                   <div class="input-group-append">
                     <button id="4" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
@@ -56,7 +63,7 @@ PRAE - Categoria
                 Rua
                 <div class="input-group mb-3">
 
-                  <input id="campo-5" class="form-control" type="text" name="" value="{{ $categoria->rua }}" readonly>
+                  <input id="campo-5" class="form-control" type="text" name="rua" value="{{ $categoria->rua }}" readonly>
                   <div class="input-group-append">
                     <button id="5" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
@@ -66,7 +73,7 @@ PRAE - Categoria
                 Número
                 <div class="input-group mb-3">
 
-                  <input id="campo-6" class="form-control" type="text" name="" value="{{ $categoria->numero }}" readonly>
+                  <input id="campo-6" class="form-control" type="text" name="numero" value="{{ $categoria->numero }}" readonly>
                   <div class="input-group-append">
                     <button id="6" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
@@ -76,7 +83,7 @@ PRAE - Categoria
                 Bairro
                 <div class="input-group mb-3">
 
-                  <input id="campo-7" class="form-control" type="text" name="" value="{{ $categoria->bairro }}" readonly>
+                  <input id="campo-7" class="form-control" type="text" name="bairro" value="{{ $categoria->bairro }}" readonly>
                   <div class="input-group-append">
                     <button id="7" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>

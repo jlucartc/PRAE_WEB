@@ -6,14 +6,16 @@ PRAE APP GERENCIAMENTO - Início
 
 @section('conteudo')
 @include('nav')
-<div class="mt-5 pt-5"></div>
-@if( $errors->any() )
-<div class="alert alert-warning mt-5 pt-5">
-  @foreach($errors->all() as $error)
-    <div class="alert alert-danger">
-      {{ $error }}
+<div class="row justify-content-center">
+  <div class="col-sm-10 mt-3">
+    @if( session()->has('mensagem') )
+      <div class="alert alert-warning">
+        <h5>{{ session('mensagem') }}</h5>
+      </div>
+    @endif
     </div>
-  @endforeach
+  </div>
 </div>
-@endif
+<div class="mt-5 pt-5">
+
 @endsection

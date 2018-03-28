@@ -13,12 +13,12 @@
 
 Route::get('/', function () {
     return view('login');
-})->name('index');
+})->middleware('redirectUsuario')->name('index');
 
 Route::post('login','SiteController@login')->name('login');
 Route::get('logout','SiteController@logout')->name('logout');
 
-Route::prefix('usuario')->group(function(){
+Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
 
   Route::get('usuarios','UsuariosController@usuarios')->name('usuario.usuarios');
   Route::get('categorias','UsuariosController@categorias')->name('usuario.categorias');

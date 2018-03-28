@@ -33,7 +33,7 @@ class SiteController extends Controller
 
       }else{
 
-        return redirect()->route('login',['message' => 'Erro no login']);
+        return redirect()->route('index')->with('mensagem','Erro no login');
 
       }
 
