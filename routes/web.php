@@ -40,7 +40,11 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
   Route::post('salvarUsuario','UsuariosController@salvarUsuario')->name('usuario.salvarUsuario');
   Route::post('salvarCategoria','UsuariosController@salvarCategoria')->name('usuario.salvarCategoria');
   Route::post('salvarDescricao','UsuariosController@salvarDescricao')->name('usuario.salvarDescricao');
-
   Route::get('baixarDocumento/{id}','UsuariosController@baixarDocumento')->name('usuario.baixarDocumento');
 
 });
+
+Route::get('app/ws/listaCategorias','UsuariosController@listaCategoriasAppWS')->name('usuario.listaCategoriasAppWS');
+Route::get('app/ws/categoria{id}','UsuariosController@categoriaAppWS')->name('usuario.categoriaAppWS');
+
+Route::post('app/ws/baixarDocumento','UsuariosController@salvarDescricao')->name('usuario.baixarDocumentoAppWS');

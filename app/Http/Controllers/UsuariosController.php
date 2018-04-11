@@ -131,7 +131,7 @@ class UsuariosController extends Controller
 
   public function confirmarCadastroDocumento(Request $request){
 
-    $path = Storage::disk('documentos_prae')->putFileAs($request->id,$request->file('arquivo'),$request->nome.'.pdf');
+    $path = Storage::disk('documentos_prae')->putFileAs($request->id,$request->file('arquivo'),$request->nome);
 
     $documento = new Documentos;
 
@@ -299,6 +299,35 @@ class UsuariosController extends Controller
     $documento = Documentos::find($id);
 
     return response()->download(storage_path('app/documentos_prae').'/'.$documento->rota);
+
+  }
+
+  public function baixarDocumentoAppWS(Request $request){
+
+      return response()->download(asset('docs').'/'.$request->rota));
+
+  }
+
+  public function listaCategoriasAppWS(){
+
+    $categorias = Categorias::all()->pluck('nome');
+
+    return response()->json($categorias->toJson());
+
+  }
+
+  public function categoriaAppWS($id){
+
+    $categorias = Categorias::all();
+
+    foreach($categorias as $categoria){
+
+      $categoria->descricoes = Descricoes::where('categoria_id',$categoria_id)->get();
+      $categoria->documentos = Documentos::where('categoria_id',$categoria_id)->get();
+
+    }
+
+    return response()->json($categorias->toJson());
 
   }
 
