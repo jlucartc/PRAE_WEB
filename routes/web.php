@@ -44,7 +44,7 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
 
 });
 
-Route::get('app/ws/listaCategorias','UsuariosController@listaCategoriasAppWS')->name('usuario.listaCategoriasAppWS');
-Route::get('app/ws/categoria{id}','UsuariosController@categoriaAppWS')->name('usuario.categoriaAppWS');
+Route::get('app/ws/listaCategorias','UsuariosController@listaCategoriasAppWS')->middleware('CORS')->name('usuario.listaCategoriasAppWS');
+Route::get('app/ws/categoria/{id}','UsuariosController@categoriaAppWS')->middleware('CORS')->name('usuario.categoriaAppWS');
 
-Route::post('app/ws/baixarDocumento','UsuariosController@salvarDescricao')->name('usuario.baixarDocumentoAppWS');
+Route::post('app/ws/baixarDocumento','UsuariosController@salvarDescricao')->middleware('CORS')->name('usuario.baixarDocumentoAppWS');

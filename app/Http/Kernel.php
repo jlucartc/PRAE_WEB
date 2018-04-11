@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'redirectUsuario' => \App\Http\Middleware\RedirectUsuario::class,
         'redirectLogin' => \App\Http\Middleware\RedirectLogin::class,
+        'CORS' => \App\Http\Middleware\Cors::class,
     ];
 }

@@ -304,17 +304,25 @@ class UsuariosController extends Controller
 
   public function baixarDocumentoAppWS(Request $request){
 
-      return response()->download(asset('docs').'/'.$request->rota));
+      return response()->download(asset('docs').'/'.$request->rota);
 
   }
 
   public function listaCategoriasAppWS(){
 
-    $categorias = Categorias::all()->pluck('nome');
+    $categorias = Categorias::all();
 
-    return response()->json($categorias->toJson());
+    $categorias->ids = $categorias->pluck('id');
+    $categorias->nomes = $categorias->pluck('nome');
 
-  }
+    return response()->json(["ids" => $categorias->ids, "nomes" => $categorias->nomes])->withHeaders([
+      "Access-Control-Allow-Origin" => "*",
+      "Acess-Control-Allow-Methods" => "GET",
+      "Accept" => "application/json",
+      "content-type" => "application/json"
+    ]);
+
+    }
 
   public function categoriaAppWS($id){
 
@@ -322,12 +330,17 @@ class UsuariosController extends Controller
 
     foreach($categorias as $categoria){
 
-      $categoria->descricoes = Descricoes::where('categoria_id',$categoria_id)->get();
-      $categoria->documentos = Documentos::where('categoria_id',$categoria_id)->get();
+      $categoria->descricoes = Descricoes::where('categoria_id',$categoria->id)->get();
+      $categoria->documentos = Documentos::where('categoria_id',$categoria->id)->get();
 
     }
 
-    return response()->json($categorias->toJson());
+    return response()->json($categorias)->withHeaders([
+      "Access-Control-Allow-Origin" => "*",
+      "Acess-Control-Allow-Methods" => "GET",
+      "Accept" => "application/json",
+      "content-type" => "application/json"
+    ]);;
 
   }
 
