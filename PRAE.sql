@@ -166,7 +166,7 @@ CREATE TABLE "usuarios" (
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   PRIMARY KEY ("id"),
-  KEY "usuarios_email_unique" ("email")
+  CONSTRAINT "usuarios_email_unique" UNIQUE ("email")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
