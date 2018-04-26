@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('login');
-})->middleware('redirectUsuario')->name('index');
+})->name('index');
 
 Route::post('login','SiteController@login')->name('login');
 Route::get('logout','SiteController@logout')->name('logout');
