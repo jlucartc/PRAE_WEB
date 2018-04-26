@@ -19,13 +19,13 @@ DROP TABLE IF EXISTS "categorias";
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "categorias" (
   "id" bigint NOT NULL,
-  "nome" text COLLATE utf8mb4_unicode_ci NOT NULL,
-  "responsavel" text COLLATE utf8mb4_unicode_ci,
-  "email" text COLLATE utf8mb4_unicode_ci,
-  "fone" varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  "rua" text COLLATE utf8mb4_unicode_ci NOT NULL,
-  "numero" text COLLATE utf8mb4_unicode_ci NOT NULL,
-  "bairro" text COLLATE utf8mb4_unicode_ci NOT NULL,
+  "nome" text NOT NULL,
+  "responsavel" text,
+  "email" text,
+  "fone" varchar(255) DEFAULT NULL,
+  "rua" text NOT NULL,
+  "numero" text NOT NULL,
+  "bairro" text NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   PRIMARY KEY ("id")
@@ -51,8 +51,8 @@ DROP TABLE IF EXISTS "descricoes";
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "descricoes" (
   "id" bigint NOT NULL,
-  "titulo" text COLLATE utf8mb4_unicode_ci NOT NULL,
-  "texto" text COLLATE utf8mb4_unicode_ci NOT NULL,
+  "titulo" text NOT NULL,
+  "texto" text NOT NULL,
   "categoria_id" bigint NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
@@ -81,8 +81,8 @@ DROP TABLE IF EXISTS "documentos";
 CREATE TABLE "documentos" (
   "id" bigint NOT NULL,
   "categoria_id" bigint NOT NULL,
-  "rota" text COLLATE utf8mb4_unicode_ci NOT NULL,
-  "nome" text COLLATE utf8mb4_unicode_ci NOT NULL,
+  "rota" text NOT NULL,
+  "nome" text NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   PRIMARY KEY ("id")
@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS "migrations";
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "migrations" (
   "id" bigint NOT NULL,
-  "migration" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  "migration" varchar(255) NOT NULL,
   "batch" integer NOT NULL,
   PRIMARY KEY ("id")
 );
@@ -134,8 +134,8 @@ DROP TABLE IF EXISTS "password_resets";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "password_resets" (
-  "email" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  "token" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  "email" varchar(255) NOT NULL,
+  "token" varchar(255) NOT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   KEY "password_resets_email_index" ("email")
 );
@@ -158,11 +158,11 @@ DROP TABLE IF EXISTS "usuarios";
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "usuarios" (
   "id" bigint NOT NULL,
-  "nome" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  "email" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  "usuario" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  "senha" varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  "remember_token" varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  "nome" varchar(255) NOT NULL,
+  "email" varchar(255) NOT NULL,
+  "usuario" varchar(255) NOT NULL,
+  "senha" varchar(255)NOT NULL,
+  "remember_token" varchar(100) DEFAULT NULL,
   "created_at" timestamp NULL DEFAULT NULL,
   "updated_at" timestamp NULL DEFAULT NULL,
   PRIMARY KEY ("id"),
