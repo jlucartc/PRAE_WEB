@@ -298,7 +298,8 @@ class UsuariosController extends Controller
 
     $documento = Documentos::find($id);
 
-    return response()->download(storage_path('app/documentos_prae').'/'.$documento->rota);
+    return storage_path();
+    //return response()->download(storage_path('app/documentos_prae').'/'.$documento->rota);
 
   }
 
