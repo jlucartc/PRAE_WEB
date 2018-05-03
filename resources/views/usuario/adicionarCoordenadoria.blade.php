@@ -16,12 +16,11 @@ PRAE - Adicionar coordenadoria
             <form class="form" action="{{ route('usuario.confirmarCadastroCoordenadoria') }}" method="post">
               {{ csrf_field() }}
               <input class="form-control mb-3" type="text" name="nome" value="" placeholder="Nome">
-              <input class="form-control mb-3" type="text" name="responsavel" value="" placeholder="Responsável">
-              <input class="form-control mb-3" type="text" name="email" value="" placeholder="Email">
+              <input class="form-control mb-3" type="text" name="coordenador" value="" placeholder="Coordenador(a)">
               <input class="form-control mb-3" type=text name="fone" value="" placeholder="Fone">
-              <input class="form-control mb-3" type="text" name="bairro" value="" placeholder="Bairro">
-              <input class="form-control mb-3" type="text" name="rua" value="" placeholder="Rua">
-              <input class="form-control mb-3" type="text" name="numero" value="" placeholder="Número">
+              <input class="form-control mb-3" type=text name="fax" value="" placeholder="Fax">
+              <input class="form-control mb-3" type="text" name="email" value="" placeholder="Email">
+
 
         </div>
         <div class="card-footer">

@@ -8,6 +8,9 @@ use App\Categorias;
 use App\Descricoes;
 use App\Documentos;
 use App\Coordenadorias;
+use App\Divisoes;
+use App\Mapas;
+use App\Compromissos;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -160,6 +163,30 @@ class UsuariosController extends Controller
 
   }
 
+  public function confirmarCadastroCoordenadoria(Request $request){
+
+    $request->validate([
+
+      "nome" => "required|string|unique:coordenadorias,nome",
+      "coordenador" => "required|string",
+      "fone" => "required|string",
+      "fax" => "required|string",
+      "email" => "required|string"
+
+    ]);
+
+    $coordenadoria = new Coordenadorias;
+
+    $coordenadoria->nome = $request->nome;
+    $coordenadoria->coordenador = $request->coordenador;
+    $coordenadoria->fone = $request->fone;
+    $coordenadoria->fax = $request->fax;
+    $coordenadoria->email = $request->email;
+
+    $coordenadoria->save();
+
+  }
+
   public function verCategoria($id){
 
     $categoria = Categorias::find($id);
@@ -183,6 +210,17 @@ class UsuariosController extends Controller
     $descricao = Descricoes::find($id);
 
     return view('usuario.verDescricao',['descricao' => $descricao]);
+
+  }
+
+  public function verCoordenadoria($id){
+
+    $coordenadoria = Coordenadorias::find($id);
+    $mapas = Mapas::all();
+    $divisoes = Divisoes::all();
+    $compromissos = Compromissos::all();
+
+    return view('usuario.verCoordenadoria',['coordenadoria' => $coordenadoria, 'mapas' => $mapas, 'divisoes' => $divisoes, 'compromissos' => $compromissos]);
 
   }
 
@@ -306,6 +344,30 @@ class UsuariosController extends Controller
 
     return redirect()->route('usuario.verCategoria',['id' => $descricao->id]);
 
+
+  }
+
+  public function salvarCoordenadoria(Request $request){
+
+    $request->validate([
+
+      'nome' => 'required|string',
+      'coordenador' => 'string',
+      'fone' => 'string',
+      'fax' => 'string',
+      'email' => 'string',
+
+    ]);
+
+    $coordenadoria = Coordenadorias::find($request->id);
+
+    $coordenadoria->nome = $request->nome;
+    $coordenadoria->coordenador = $request->coordenador;
+    $coordenadoria->fone = $request->fone;
+    $coordenadoria->fax = $request->fax;
+    $coordenadoria->email = $request->email;
+
+    $coordenadoria->save();
 
   }
 
