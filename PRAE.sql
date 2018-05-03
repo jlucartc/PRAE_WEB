@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS categorias;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE categorias (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   nome text NOT NULL,
   tipo_categoria int NOT NULL,
   responsavel text,
@@ -28,8 +28,7 @@ CREATE TABLE categorias (
   numero text NOT NULL,
   bairro text NOT NULL,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,10 +50,9 @@ DROP TABLE IF EXISTS coordenadorias;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE coordenadorias (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,13 +74,12 @@ DROP TABLE IF EXISTS descricoes;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE descricoes (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   titulo text NOT NULL,
   texto text NOT NULL,
   categoria_id int NOT NULL,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,10 +101,9 @@ DROP TABLE IF EXISTS divisoes;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE divisoes (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,13 +125,12 @@ DROP TABLE IF EXISTS documentos;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE documentos (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   categoria_id int NOT NULL,
   rota text NOT NULL,
   nome text NOT NULL,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,10 +152,9 @@ DROP TABLE IF EXISTS mapas;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE mapas (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -182,10 +176,9 @@ DROP TABLE IF EXISTS migrations;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE migrations (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   migration varchar(255) NOT NULL,
-  batch int NOT NULL,
-  PRIMARY KEY (id)
+  batch int NOT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -208,10 +201,9 @@ DROP TABLE IF EXISTS password_resets;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE password_resets (
-  email varchar(255) NOT NULL,
+  email varchar(255) PRIMARY KEY,
   token varchar(255) NOT NULL,
-  created_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (email)
+  created_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -233,16 +225,14 @@ DROP TABLE IF EXISTS usuarios;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE usuarios (
-  id int NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
   nome varchar(255) NOT NULL,
-  email varchar(255) NOT NULL,
+  email varchar(255) NOT NULL UNIQUE,
   usuario varchar(255) NOT NULL,
   senha varchar(255) NOT NULL,
   remember_token varchar(100) DEFAULT NULL,
   created_at timestamp NULL DEFAULT NULL,
-  updated_at timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (email)
+  updated_at timestamp NULL DEFAULT NULL
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
