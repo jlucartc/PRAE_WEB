@@ -7,6 +7,7 @@ use App\User;
 use App\Categorias;
 use App\Descricoes;
 use App\Documentos;
+use App\Coordenadorias;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,14 @@ class UsuariosController extends Controller
 
   }
 
+  public function coordenadorias(){
+
+    $coordenadorias = Coordenadorias::all();
+
+    return view('usuario.coordenadorias',['coordenadorias' => $coordenadorias]);
+
+  }
+
   public function adicionarUsuario(){
 
     return view('usuario.adicionarUsuario');
@@ -38,6 +47,12 @@ class UsuariosController extends Controller
   public function adicionarCategoria(){
 
     return view('usuario.adicionarCategoria');
+
+  }
+
+  public function adicionarCoordenadoria(){
+
+    return view('usuario.adicionarCoordenadoria');
 
   }
 

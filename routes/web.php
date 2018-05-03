@@ -41,6 +41,8 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
   Route::post('salvarCategoria','UsuariosController@salvarCategoria')->name('usuario.salvarCategoria');
   Route::post('salvarDescricao','UsuariosController@salvarDescricao')->name('usuario.salvarDescricao');
   Route::get('baixarDocumento/{id}','UsuariosController@baixarDocumento')->name('usuario.baixarDocumento');
+  Route::get('coordenadorias','UsuariosController@coordenadorias')->name('usuario.coordenadorias');
+  Route::get('adicionarCoordenadoria','UsuariosController@adicionarCoordenadorias')->name('usuario.adicionarCoordenadoria');
 
 });
 

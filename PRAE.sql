@@ -51,6 +51,11 @@ DROP TABLE IF EXISTS coordenadorias;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE coordenadorias (
   id BIGSERIAL PRIMARY KEY,
+  nome text NOT NULL,
+  coordenador text,
+  fone varchar(255) DEFAULT NULL,
+  fax varchar(255) DEFAULT NULL,
+  email text,
   created_at timestamp NULL DEFAULT NULL,
   updated_at timestamp NULL DEFAULT NULL
 );
@@ -102,6 +107,11 @@ DROP TABLE IF EXISTS divisoes;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE divisoes (
   id BIGSERIAL PRIMARY KEY,
+  nome text NOT NULL,
+  coordenadoria_id bigint NOT NULL,
+  fone varchar(255) DEFAULT NULL,
+  fax varchar(255) DEFAULT NULL,
+  email text NOT NULL,
   created_at timestamp NULL DEFAULT NULL,
   updated_at timestamp NULL DEFAULT NULL
 );
@@ -153,6 +163,9 @@ DROP TABLE IF EXISTS mapas;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE mapas (
   id BIGSERIAL PRIMARY KEY,
+  nome text NOT NULL,
+  coordenadoria_id bigint NOT NULL,
+  rota text NOT NULL,
   created_at timestamp NULL DEFAULT NULL,
   updated_at timestamp NULL DEFAULT NULL
 );
@@ -189,7 +202,7 @@ CREATE TABLE migrations (
 BEGIN;
 LOCK TABLE migrations;
 /*!40000 ALTER TABLE "migrations" DISABLE KEYS */;
-INSERT INTO migrations VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_03_15_194109_create_categorias_table',1),(4,'2018_03_20_183411_create_descricoes_table',1),(5,'2018_03_20_183457_create_documentos_table',1),(6,'2018_05_02_200811_create_coordenadorias_table',1),(7,'2018_05_02_200835_create_divisoes_table',1),(8,'2018_05_02_200840_create_mapas_table',1);
+INSERT INTO migrationS VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2018_03_15_194109_create_categorias_table',1),(4,'2018_03_20_183411_create_descricoes_table',1),(5,'2018_03_20_183457_create_documentos_table',1),(6,'2018_05_02_200811_create_coordenadorias_table',1),(7,'2018_05_02_200835_create_divisoes_table',1),(8,'2018_05_02_200840_create_mapas_table',1);
 /*!40000 ALTER TABLE "migrations" ENABLE KEYS */;
 COMMIT;
 
@@ -201,7 +214,7 @@ DROP TABLE IF EXISTS password_resets;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE password_resets (
-  email varchar(255) PRIMARY KEY,
+  email varchar(255) NOT NULL PRIMARY KEY,
   token varchar(255) NOT NULL,
   created_at timestamp NULL DEFAULT NULL
 );
@@ -239,6 +252,7 @@ CREATE TABLE usuarios (
 --
 -- Dumping data for table "usuarios"
 --
+
 BEGIN;
 LOCK TABLE usuarios;
 /*!40000 ALTER TABLE "usuarios" DISABLE KEYS */;
@@ -251,4 +265,4 @@ COMMIT;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-03 13:58:19
+-- Dump completed on 2018-05-03 15:47:07

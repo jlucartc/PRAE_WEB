@@ -15,6 +15,11 @@ class CreateDivisoesTable extends Migration
     {
         Schema::create('divisoes', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('nome');
+            $table->biginteger('coordenadoria_id');
+            $table->string('fone')->nullable();
+            $table->string('fax')->nullable();
+            $table->text('email');
             $table->timestamps();
         });
     }

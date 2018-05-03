@@ -15,6 +15,11 @@ class CreateCoordenadoriasTable extends Migration
     {
         Schema::create('coordenadorias', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('nome');
+            $table->text('coordenador')->nullable();
+            $table->string('fone')->nullable();
+            $table->string('fax')->nullable();
+            $table->text('email')->nullable();
             $table->timestamps();
         });
     }
