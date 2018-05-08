@@ -22,6 +22,12 @@ PRAE - Adicionar categoria
               <input class="form-control mb-3" type="text" name="bairro" value="" placeholder="Bairro">
               <input class="form-control mb-3" type="text" name="rua" value="" placeholder="Rua">
               <input class="form-control mb-3" type="text" name="numero" value="" placeholder="Número">
+              <select class="form-control mb-3" name="tipo">
+                <option value="1">Bolsas</option>
+                <option value="2">Auxílios</option>
+                <option value="3">Programas</option>
+                <option value="4">Institucionais</option>
+              </select>
 
         </div>
         <div class="card-footer">

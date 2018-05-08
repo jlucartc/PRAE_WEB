@@ -40,6 +40,16 @@ PRAE - Coordenadoria
                     </div>
                 </div>
 
+                Email
+                <div class="input-group mb-3">
+
+                  <input id="campo-3" class="form-control" type="text" name="email" value="{{ $coordenadoria->email }}" readonly>
+                  <div class="input-group-append">
+                    <button id="3" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                  </div>
+
+                </div>
+
                 Fone
                 <div class="input-group mb-3">
 
@@ -53,22 +63,13 @@ PRAE - Coordenadoria
                 Fax
                 <div class="input-group mb-3">
 
-                  <input id="campo-4" class="form-control" type="text" name="fax" value="{{ $coordenadoria->fax }}" readonly>
+                  <input id="campo-5" class="form-control" type="text" name="fax" value="{{ $coordenadoria->fax }}" readonly>
                   <div class="input-group-append">
-                    <button id="4" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="5" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
 
-                Email
-                <div class="input-group mb-3">
-
-                  <input id="campo-3" class="form-control" type="text" name="email" value="{{ $coordenadoria->email }}" readonly>
-                  <div class="input-group-append">
-                    <button id="3" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
-                  </div>
-
-                </div>
 
         </div>
         <div class="card-footer">
@@ -96,7 +97,7 @@ PRAE - Coordenadoria
     @if( !$compromissos->isEmpty() )
       <div class="list-group">
         @foreach( $compromissos as $compromisso )
-          <a href="{{ route('usuario.verCompromisso',['id' => $compromisso->id]) }}" class="list-group-item list-group-item-action border border-dark">{{ ucfirst($compromisso->titulo) }}</a>
+          <a href="{{ route('usuario.verCompromisso',['id' => $compromisso->id]) }}" class="list-group-item list-group-item-action border border-dark">{{ ucfirst($compromisso->titulo) }} - {{ $compromisso->data }}</a>
         @endforeach
       </div>
     @else
@@ -116,7 +117,7 @@ PRAE - Coordenadoria
         Não há divisões cadastradas nesta coordenadoria
       </div>
     @endif
-    <h2 class="mt-5 mb-3">Lista de mapas da coordenadoria  <a href="{{ route('usuario.adicionarMapa',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar Mapa  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3">Lista de mapas da coordenadoria  <a href="{{ route('usuario.adicionarMapa',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar mapa  <span class="fas fa-plus"></span> </a></h2>
     @if( !$mapas->isEmpty() )
       <div class="list-group">
         @foreach( $mapas as $mapa )

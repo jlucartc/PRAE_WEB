@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('titulo')
-PRAE - Adicionar coordenadoria
+PRAE - adicionar mapa
 @endsection
 
 @section('conteudo')
@@ -17,17 +17,14 @@ PRAE - Adicionar coordenadoria
       @endif
       <div class="card">
         <div class="card-header">
-            <h2>Cadastrar coordenadoria</h2>
+            <h2>Cadastrar mapa</h2>
         </div>
         <div class="card-body">
-            <form class="form" action="{{ route('usuario.confirmarCadastroCoordenadoria') }}" method="post">
+            <form class="form" action="{{ route('usuario.confirmarCadastroMapa') }}" method="post" enctype="multipart/form-data">
               {{ csrf_field() }}
               <input class="form-control mb-3" type="text" name="nome" value="" placeholder="Nome">
-              <input class="form-control mb-3" type="text" name="coordenador" value="" placeholder="Coordenador(a)">
-              <input class="form-control mb-3" type=text name="fone" value="" placeholder="Fone">
-              <input class="form-control mb-3" type=text name="fax" value="" placeholder="Fax">
-              <input class="form-control mb-3" type="text" name="email" value="" placeholder="Email">
-
+              <input class="form-control mb-3" type="file" name="mapa" value="" placeholder="Mapa">
+              <input type=hidden name="id" value="{{ $id }}">
 
         </div>
         <div class="card-footer">

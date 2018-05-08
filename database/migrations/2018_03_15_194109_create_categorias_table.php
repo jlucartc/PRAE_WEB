@@ -20,9 +20,9 @@ class CreateCategoriasTable extends Migration
             $table->text('responsavel')->nullable();
             $table->text('email')->nullable();
             $table->string('fone')->nullable();
-            $table->text('rua');
-            $table->text('numero');
-            $table->text('bairro');
+            $table->text('rua')->nullable();
+            $table->text('numero')->nullable();
+            $table->text('bairro')->nullable();
             $table->timestamps();
         });
     }

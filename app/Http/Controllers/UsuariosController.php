@@ -71,6 +71,24 @@ class UsuariosController extends Controller
 
   }
 
+  public function adicionarCompromisso($id){
+
+    return view('usuario.adicionarCompromisso',['id' => $id]);
+
+  }
+
+  public function adicionarDivisao($id){
+
+    return view('usuario.adicionarDivisao',['id' => $id]);
+
+  }
+
+  public function adicionarMapa($id){
+
+    return view('usuario.adicionarMapa',['id' => $id]);
+
+  }
+
   public function confirmarCadastroUsuario(Request $request){
 
     $request->validate([
@@ -101,11 +119,12 @@ class UsuariosController extends Controller
 
       'nome' => 'required|string|unique:categorias,nome',
       'responsavel' => 'required|string',
-      'email' => 'required|string',
-      'fone' => 'required|string',
-      'bairro' => 'required|string',
-      'rua' => 'required|string',
-      'numero' => 'required|string'
+      'email' => 'nullable|string',
+      'fone' => 'nullable|string',
+      'bairro' => 'nullable|string',
+      'rua' => 'nullable|string',
+      'numero' => 'nullable|string',
+      'tipo' => 'required|numeric'
 
     ]);
 
@@ -118,6 +137,7 @@ class UsuariosController extends Controller
     $categoria->bairro = $request->bairro;
     $categoria->rua = $request->rua;
     $categoria->numero = $request->numero;
+    $categoria->tipo_categoria = $request->tipo;
 
     $categoria->save();
 
@@ -169,9 +189,9 @@ class UsuariosController extends Controller
 
       "nome" => "required|string|unique:coordenadorias,nome",
       "coordenador" => "required|string",
-      "fone" => "required|string",
-      "fax" => "required|string",
-      "email" => "required|string"
+      "fone" => "nullable|string",
+      "fax" => "nullable|string",
+      "email" => "nullable|string"
 
     ]);
 
@@ -184,6 +204,77 @@ class UsuariosController extends Controller
     $coordenadoria->email = $request->email;
 
     $coordenadoria->save();
+
+    return redirect()->route('usuario.coordenadorias');
+
+  }
+
+  public function confirmarCadastroCompromisso(Request $request){
+
+    $request->validate([
+
+      'titulo' => 'required|string',
+      'data' => 'required|string'
+
+    ]);
+
+    $compromisso = new Compromissos;
+
+    $compromisso->coordenadoria_id = $request->id;
+    $compromisso->titulo = $request->titulo;
+    $compromisso->data = $request->data;
+
+    $compromisso->save();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+
+  }
+
+  public function confirmarCadastroMapa(Request $request){
+
+    $request->validate([
+
+      'nome' => 'nullable|string|unique:mapas,nome',
+      'arquivo' => 'required|file'
+
+    ]);
+
+    $path = Storage::disk('mapas_prae')->putFileAs($request->id,$request->file('arquivo'),$request->nome);
+
+    $documento = new Documentos;
+
+    $documento->nome = $request->nome;
+    $documento->rota = $path;
+    $documento->categoria_id = $request->id;
+
+    $documento->save();
+
+    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
+
+  }
+
+  public function confirmarCadastroDivisao(Request $request){
+
+    $request->validate([
+
+      'nome' => 'required|string',
+      'email' => 'nullable|string',
+      'fone' => 'nullable|string',
+      'fax' => 'nullable|string'
+
+    ]);
+
+    $divisao = new Divisoes;
+
+    $divisao->nome = $request->nome;
+    $divisao->email = $request->email;
+    $divisao->fone = $request->fone;
+    $divisao->fax = $request->fax;
+    $divisao->coordenadoria_id = $request->id;
+
+    $divisao->save();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
 
   }
 
@@ -216,11 +307,29 @@ class UsuariosController extends Controller
   public function verCoordenadoria($id){
 
     $coordenadoria = Coordenadorias::find($id);
-    $mapas = Mapas::all();
-    $divisoes = Divisoes::all();
-    $compromissos = Compromissos::all();
+    $mapas = Mapas::where('coordenadoria_id',$id)->get();
+    $divisoes = Divisoes::where('coordenadoria_id',$id)->get();
+    $compromissos = Compromissos::where('coordenadoria_id',$id)->get();
 
     return view('usuario.verCoordenadoria',['coordenadoria' => $coordenadoria, 'mapas' => $mapas, 'divisoes' => $divisoes, 'compromissos' => $compromissos]);
+
+  }
+
+  public function verCompromisso($id){
+
+    $compromisso = Compromissos::find($id);
+
+    $compromisso->data = explode(' ',$compromisso->data)[0].'T'.explode(' ',$compromisso->data)[1];
+
+    return view('usuario.verCompromisso',['compromisso' => $compromisso]);
+
+  }
+
+  public function verDivisao($id){
+
+    $divisao = Divisoes::find($id);
+
+    return view('usuario.verDivisao',['divisao' => $divisao]);
 
   }
 
@@ -368,6 +477,82 @@ class UsuariosController extends Controller
     $coordenadoria->email = $request->email;
 
     $coordenadoria->save();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+
+  }
+
+  public function salvarCompromisso(Request $request){
+
+    $compromisso = Compromissos::find($request->id);
+
+    if($compromisso->titulo == $request->titulo){
+
+        $request->validate([
+
+          'data' => 'required|string'
+
+        ]);
+
+    }else{
+
+        $request->validate([
+
+          'titulo' => 'required|string|unique:compromissos,nome',
+          'data' => 'required|string'
+
+        ]);
+
+    }
+
+    $compromisso->titulo = $request->titulo;
+    $compromisso->data = $request->data;
+
+    $compromisso->save();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+
+  }
+
+  public function salvarDivisao(Request $request){
+
+    $divisao = Divisoes::find($request->id);
+
+    if( $divisao->nome == $request->nome ){
+
+      $request->validate(
+        [
+
+          'email' => 'nullable|string',
+          'fone' => 'nullable|string',
+          'fax' => 'nullable|string'
+
+        ]
+      );
+
+    }else{
+
+      $request->validate(
+        [
+
+          'nome' => 'required|string|unique|divisoes,nome',
+          'email' => 'nullable|string',
+          'fone' => 'nullable|string',
+          'fax' => 'nullable|string'
+
+        ]
+      );
+
+    }
+
+    $divisao->nome = $request->nome;
+    $divisao->email = $request->email;
+    $divisao->fone = $request->fone;
+    $divisao->fax = $request->fax;
+
+    $divisao->save();
+
+    return redirect()->route('usuario.verDivisao',['id' => $request->id]);
 
   }
 
