@@ -41,6 +41,8 @@ class UsuariosController extends Controller
 
   }
 
+  /// Adicionar
+
   public function adicionarUsuario(){
 
     return view('usuario.adicionarUsuario');
@@ -88,6 +90,14 @@ class UsuariosController extends Controller
     return view('usuario.adicionarMapa',['id' => $id]);
 
   }
+
+  public function adicionarItem($id){
+
+    return view('usuario.adicionarItem',['id' => $id]);
+
+  }
+
+  /// Confirmar cadastro
 
   public function confirmarCadastroUsuario(Request $request){
 
@@ -280,6 +290,29 @@ class UsuariosController extends Controller
 
   }
 
+  public function confirmarCadastroItem(Request $request){
+
+    $request->validate([
+
+      'nome' => 'required|string',
+      'descricao' => 'required|string'
+
+    ]);
+
+    $item = new Items;
+
+    $item->nome = $request->nome;
+    $item->descricao = $request->descricao;
+    $item->categoria_id = $request->id;
+
+    $item->save();
+
+    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
+
+  }
+
+  /// Ver
+
   public function verCategoria($id){
 
     $categoria = Categorias::find($id);
@@ -334,6 +367,16 @@ class UsuariosController extends Controller
     return view('usuario.verDivisao',['divisao' => $divisao]);
 
   }
+
+  public function verItem($id){
+
+    $item = Items::find($id);
+
+    return redirect()->route('usuario.verItem',['item' => $item]);
+
+  }
+
+  /// Deletar
 
   public function deletarCategoria(Request $request){
 
@@ -442,6 +485,20 @@ class UsuariosController extends Controller
     return redirect()->route('usuario.coordenadorias');
 
   }
+
+  public function deletarItem(Request $request){
+
+    $item = Items::find($request->id);
+
+    $id = $item->categoria_id;
+
+    $item->delete();
+
+    return redirect()->route('usuario.verCategoria',['id' => $id]);
+
+  }
+
+  /// Salvar
 
   public function salvarUsuario(Request $request){
 
@@ -618,6 +675,28 @@ class UsuariosController extends Controller
 
   }
 
+  public function salvarItem(Request $request){
+
+    $request->validate([
+
+      'nome' => 'required|string',
+      'descricao' => 'required|string'
+
+    ]);
+
+    $item = Items::find($request->id);
+
+    $item->nome = ($item->nome == $request->nome) ? $item->nome : $request->nome;
+    $item->descricao = ($item->descricao == $request->descricao) ? $item->descricao : $request->descricao;
+
+    $item->save();
+
+    return redirect()->route('usuario.verCategoria',['id' => $item->categoria_id]);
+
+  }
+
+  /// Baixar
+
   public function baixarDocumento($id){
 
     $documento = Documentos::find($id);
@@ -634,6 +713,8 @@ class UsuariosController extends Controller
 
 
   }
+
+  /// Web Services
 
   public function baixarDocumentoAppWS(Request $request){
 
