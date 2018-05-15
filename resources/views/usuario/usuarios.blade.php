@@ -8,7 +8,7 @@ PRAE - Usuários
 @include('nav')
 <div class="row justify-content-center">
   <div class="col-sm-10">
-    <h1 class="mt-5 pt-5 mb-3">Usuários <a href="{{ route('usuario.adicionarUsuario') }}" class="btn btn-secondary" name="button">Adicionar usuário<i class="fas fa-plus ml-2"></i></a> </h1>
+    <h1 class="mt-5 pt-5 mb-3">Usuários <a href="{{ route('usuario.adicionarUsuario') }}" class="btn btn-secondary float-right" name="button" title="adicionar usuário">Adicionar usuário<i class="fas fa-plus ml-2"></i></a> </h1>
     @if(!$usuarios->isEmpty())
       <div class="list-group">
         @foreach($usuarios as $usuario)

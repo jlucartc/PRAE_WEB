@@ -8,7 +8,7 @@
 @include('nav')
 <div class="row justify-content-center">
   <div class="col-sm-10">
-    <h1 class="mt-5 pt-5 mb-3">Coordenadorias <a href="{{ route('usuario.adicionarCoordenadoria') }}" class="btn btn-secondary" >Adicionar coordenadoria <span class="fas fa-plus"></span></a></h1>
+    <h1 class="mt-5 pt-5 mb-3">Coordenadorias <a href="{{ route('usuario.adicionarCoordenadoria') }}" class="btn btn-secondary float-right" >Adicionar coordenadoria <span class="fas fa-plus"></span></a></h1>
     @if(!$coordenadorias->isEmpty())
       <div class="list-group">
         @foreach($coordenadorias as $coordenadoria)

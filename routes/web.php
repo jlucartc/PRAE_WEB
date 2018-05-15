@@ -60,6 +60,7 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
   Route::post('confirmarCadastroCompromisso','UsuariosController@confirmarCadastroCompromisso')->name('usuario.confirmarCadastroCompromisso');
   Route::post('confirmarCadastroDivisao','UsuariosController@confirmarCadastroDivisao')->name('usuario.confirmarCadastroDivisao');
   Route::post('confirmarCadastroMapa','UsuariosController@confirmarCadastroMapa')->name('usuario.confirmarCadastroMapa');
+  Route::get('baixarMapa/{id}','UsuariosController@baixarMapa')->name('usuario.baixarMapa');
 
 
 });

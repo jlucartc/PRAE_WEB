@@ -64,7 +64,7 @@ PRAE - divisao
             </div>
           </div>
         </div>
-      </form><a href="{{ route('usuario.verCoordenadoria',['id' => $divisao->categoria_id ]) }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecaoDivisao" name="button">Apagar compromisso</button>
+      </form><a href="{{ route('usuario.verCoordenadoria',['id' => $divisao->coordenadoria_id ]) }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecaoDivisao" name="button">Apagar divisão</button>
         <div class="modal fade" id="confirmarDelecaoDivisao">
           <div class="modal-dialog">
             <div class="modal-content">

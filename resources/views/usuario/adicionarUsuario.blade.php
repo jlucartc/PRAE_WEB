@@ -22,7 +22,7 @@ PRAE - Adicionar usuário
               <input class="form-control mb-3" type="password" name="senha_confirmation" value="" placeholder="Confirmar senha">
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-success mr-2" name="button">Cadastrar</button><button type="button" class="btn btn-danger"name="button">Cancelar</button>
+          <button type="submit" class="btn btn-success mr-2" name="button" title="confirmar cadastro">Cadastrar</button><button type="button" class="btn btn-danger"name="button" title="cancelar cadastro">Cancelar</button>
           </form>
         </div>
       </div>

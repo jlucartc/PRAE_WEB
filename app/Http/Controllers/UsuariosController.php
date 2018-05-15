@@ -235,21 +235,23 @@ class UsuariosController extends Controller
     $request->validate([
 
       'nome' => 'nullable|string|unique:mapas,nome',
-      'arquivo' => 'required|file'
+      'mapa' => 'required|file'
 
     ]);
 
-    $path = Storage::disk('mapas_prae')->putFileAs($request->id,$request->file('arquivo'),$request->nome);
+    $nome = ( $request->nome == NULL ) ? $request->mapa->getClientOriginalName() : $request->nome ;
 
-    $documento = new Documentos;
+    $path = Storage::disk('mapas_prae')->putFileAs($request->id,$request->mapa,$nome);
 
-    $documento->nome = $request->nome;
-    $documento->rota = $path;
-    $documento->categoria_id = $request->id;
+    $mapa = new Mapas;
 
-    $documento->save();
+    $mapa->nome = $nome;
+    $mapa->rota = $path;
+    $mapa->coordenadoria_id = $request->id;
 
-    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
+    $mapa->save();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
 
   }
 
@@ -378,6 +380,66 @@ class UsuariosController extends Controller
     $desc->delete();
 
     return redirect()->route('usuario.verCategoria',['id' => $categoriaId]);
+
+  }
+
+  public function deletarMapa(Request $request){
+
+    $mapa = Mapas::find($request->id);
+
+    $coordenadoria_id = $mapa->coordenadoria_id;
+
+    Storage::disk('mapas_prae')->delete('/'.$mapa->rota);
+
+    $mapa->delete();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $coordenadoria_id]);
+
+  }
+
+  public function deletarDivisao(Request $request){
+
+    $divisao = Divisoes::find($request->id);
+
+    $coordenadoria_id = $divisao->coordenadoria_id;
+
+    $divisao->delete();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+
+  }
+
+  public function deletarCompromisso(Request $request){
+
+    $compromisso = Compromissos::find($request->id);
+
+    $coordenadoria_id = $compromisso->coordenadoria_id;
+
+    $compromisso->delete();
+
+    return redirect()->route('usuario.verCoordenadoria',['id' => $coordenadoria_id]);
+
+  }
+
+  public function deletarCoordenadoria(Request $request){
+
+    $coordenadoria = Coordenadorias::find($request->id);
+
+    $mapas = Mapas::where('coordenadoria_id',$request->id)->get();
+
+    Divisoes::where('coordenadoria_id',$request->id)->delete();
+
+    Compromissos::where('coordenadoria_id',$request->id)->delete();
+
+    foreach($mapas as $mapa){
+
+      Storage::disk('mapas_prae')->delete('/'.$mapa->rota);
+      $mapa->delete();
+    }
+
+    $coordenadoria->delete();
+
+    return redirect()->route('usuario.coordenadorias');
 
   }
 
@@ -561,6 +623,15 @@ class UsuariosController extends Controller
     $documento = Documentos::find($id);
 
     return response()->download(storage_path('app/documentos_prae').'/'.$documento->rota);
+
+  }
+
+  public function baixarMapa($id){
+
+    $mapa = Mapas::find($id);
+
+    return response()->download(storage_path('app/mapas_prae').'/'.$mapa->rota);
+
 
   }
 

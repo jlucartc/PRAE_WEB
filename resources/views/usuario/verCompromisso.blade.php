@@ -47,7 +47,7 @@ PRAE - compromisso
             </div>
           </div>
         </div>
-      </form><a href="{{ route('usuario.verCoordenadoria',['id' => $compromisso->categoria_id ]) }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecaoCompromisso" name="button">Apagar compromisso</button>
+      </form><a href="{{ route('usuario.verCoordenadoria',['id' => $compromisso->coordenadoria_id ]) }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecaoCompromisso" name="button">Apagar compromisso</button>
         <div class="modal fade" id="confirmarDelecaoCompromisso">
           <div class="modal-dialog">
             <div class="modal-content">

@@ -19,7 +19,7 @@
             <input class="form-control" type="file" name="arquivo" value="">
       </div>
       <div class="card-footer">
-            <button class="btn btn-success" type="submit" name="button">Enviar</button>
+            <button class="btn btn-success" type="submit" name="button" title="enviar documento">Enviar</button>
         </form>
       </div>
     </div>

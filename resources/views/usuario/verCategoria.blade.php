@@ -27,7 +27,7 @@ PRAE - Categoria
 
                     <input id="campo-1" class="form-control" type="text" name="nome" value="{{ $categoria->nome }}" readonly>
                     <div class="input-group-append">
-                      <button id="1" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span</button>
+                      <button id="1" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span</button>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@ PRAE - Categoria
 
                     <input id="campo-2" class="form-control" type="text" name="responsavel" value="{{ $categoria->responsavel }}" readonly>
                     <div class="input-group-append">
-                      <button id="2" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                      <button id="2" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@ PRAE - Categoria
 
                   <input id="campo-3" class="form-control" type="text" name="email" value="{{ $categoria->email }}" readonly>
                   <div class="input-group-append">
-                    <button id="3" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="3" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -55,7 +55,7 @@ PRAE - Categoria
 
                   <input id="campo-4" class="form-control" type="text" name="fone" value="{{ $categoria->fone }}" readonly>
                   <div class="input-group-append">
-                    <button id="4" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="4" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -65,7 +65,7 @@ PRAE - Categoria
 
                   <input id="campo-5" class="form-control" type="text" name="rua" value="{{ $categoria->rua }}" readonly>
                   <div class="input-group-append">
-                    <button id="5" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="5" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -75,7 +75,7 @@ PRAE - Categoria
 
                   <input id="campo-6" class="form-control" type="text" name="numero" value="{{ $categoria->numero }}" readonly>
                   <div class="input-group-append">
-                    <button id="6" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="6" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
@@ -85,14 +85,14 @@ PRAE - Categoria
 
                   <input id="campo-7" class="form-control" type="text" name="bairro" value="{{ $categoria->bairro }}" readonly>
                   <div class="input-group-append">
-                    <button id="7" class="btn btn-primary destravar trava" type="button" name="button"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="7" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
                 </div>
 
         </div>
         <div class="card-footer">
-            <button class="btn btn-success mr-2" type="button" data-toggle="modal" data-target="#confirmarMudancas" name="button">Salvar mudanças</button><a href="{{ route('usuario.categorias') }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" name="button">Apagar categoria</button>
+            <button class="btn btn-success mr-2" type="button" data-toggle="modal" data-target="#confirmarMudancas" name="button" title="salvar mudanças">Salvar mudanças</button><a href="{{ route('usuario.categorias') }}" class="btn btn-primary mr-2" title="cancelar mudanças e voltar">Cancelar</a><button class="btn btn-danger" type="button" name="button" title="apagar categoria">Apagar categoria</button>
             <div id="confirmarMudancas" class="modal fade">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -103,7 +103,7 @@ PRAE - Categoria
                       Deseja salvar as alterações?
                   </div>
                   <div class="modal-footer">
-                      <button class="btn btn-success mr-2" type="submit" name="button">Confirmar</button><button class="btn btn-danger" type="button" data-dismiss="modal" name="button">Cancelar</button>
+                      <button class="btn btn-success mr-2" type="submit" name="button" title="confirmar mudanças">Confirmar</button><button class="btn btn-danger" type="button" data-dismiss="modal" name="button" title="cancelar mudanças">Cancelar</button>
                   </div>
                 </div>
               </div>
@@ -112,7 +112,7 @@ PRAE - Categoria
             </form>
         </div>
     </div>
-    <h2 class="mt-3 mb-3">Lista de descrições da categoria  <a href="{{ route('usuario.adicionarDescricao',['id' => $categoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar descrição  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3">Lista de descrições da categoria  <a href="{{ route('usuario.adicionarDescricao',['id' => $categoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar descrição  <span class="fas fa-plus"></span> </a></h2>
     @if( !$descricoes->isEmpty() )
       <div class="list-group">
         @foreach( $descricoes as $descricao )
@@ -124,11 +124,11 @@ PRAE - Categoria
         Não há descrições nesta categoria
       </div>
     @endif
-    <h2 class="mt-5 mb-3">Lista de documentos da categoria   <a href="{{ route('usuario.adicionarDocumento',['id' => $categoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar documento  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3">Lista de documentos da categoria   <a href="{{ route('usuario.adicionarDocumento',['id' => $categoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar documento  <span class="fas fa-plus"></span> </a></h2>
     @if( !$documentos->isEmpty() )
       <div class="list-group">
         @foreach( $documentos as $documento )
-          <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2">Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoDocumento{{ $documento->id }}" >Apagar arquivo</button> </div>      </a>
+      <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2" title="baixar arquivo" >Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoDocumento{{ $documento->id }}" title="apagar arquivo">Apagar arquivo</button> </div>      </a>
           <div class="modal fade" id="confirmarDelecaoDocumento{{ $documento->id }}">
               <div class="modal-dialog">
                   <div class="modal-content">
@@ -141,7 +141,7 @@ PRAE - Categoria
                       <div class="modal-footer">
                         <form class="form" action="{{ route('usuario.deletarDocumento',['id' => $documento->id ]) }}" method="post">
                               {{ csrf_field() }}
-                              <button type="submit" class="btn btn-success mr-2" name="button">Confirmar</button><button class="btn btn-danger" type="button" data-dismiss="modal" name="button">Cancelar</button>
+                              <button type="submit" class="btn btn-success mr-2" name="button" title="confirmar deleção de documento">Confirmar</button><button class="btn btn-danger" type="button" data-dismiss="modal" name="button" title="cancelar deleção">Cancelar</button>
                         </form>
                       </div>
                   </div>

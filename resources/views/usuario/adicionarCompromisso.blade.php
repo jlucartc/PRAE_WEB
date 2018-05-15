@@ -28,7 +28,7 @@ PRAE - Adicionar compromisso
 
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-success mr-2" name="button">Cadastrar</button><button type="button" class="btn btn-danger"name="button">Cancelar</button>
+          <button type="submit" class="btn btn-success mr-2" name="button" title="confirmar cadastro">Cadastrar</button><button type="button" class="btn btn-danger"name="button" title="cancelar cadastro">Cancelar</button>
           </form>
         </div>
       </div>

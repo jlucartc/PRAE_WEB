@@ -73,7 +73,7 @@ PRAE - Coordenadoria
 
         </div>
         <div class="card-footer">
-            <button class="btn btn-success mr-2" type="button" data-toggle="modal" data-target="#confirmarMudancas" name="button">Salvar mudanças</button><a href="{{ route('usuario.coordenadorias') }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" name="button">Apagar coordenadoria</button>
+            <button class="btn btn-success mr-2" type="button" data-toggle="modal" data-target="#confirmarMudancas" name="button">Salvar mudanças</button><a href="{{ route('usuario.coordenadorias') }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" data-toggle="modal" data-target="#confirmarDelecaoCoordenadoria" type="button" name="button">Apagar coordenadoria</button>
             <div id="confirmarMudancas" class="modal fade">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -91,9 +91,25 @@ PRAE - Coordenadoria
             </div>
 
             </form>
+
+            <div id="confirmarDelecaoCoordenadoria" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h3>Corfirmar deleção</h3>
+                  </div>
+                  <div class="modal-body">
+                      Deseja deletar a coordenadoria?
+                  </div>
+                  <div class="modal-footer">
+                      <form class="form" action="{{ route('usuario.deletarCoordenadoria',['id' => $coordenadoria->id]) }}" method="post"> {{ csrf_field() }} <button class="btn btn-success mr-2" type="submit" >Confirmar</button> </form><button class="btn btn-danger" type="button" data-dismiss="modal" name="button">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
     </div>
-    <h2 class="mt-3 mb-3">Lista de compromissos da coordenadoria  <a href="{{ route('usuario.adicionarCompromisso',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar compromisso  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3">Lista de compromissos da coordenadoria  <a href="{{ route('usuario.adicionarCompromisso',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar compromisso  <span class="fas fa-plus"></span> </a></h2>
     @if( !$compromissos->isEmpty() )
       <div class="list-group">
         @foreach( $compromissos as $compromisso )
@@ -105,7 +121,7 @@ PRAE - Coordenadoria
         Não há compromissos registrados nesta coordenadoria
       </div>
     @endif
-    <h2 class="mt-3 mb-3">Lista de divisões da coordenadoria  <a href="{{ route('usuario.adicionarDivisao',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar divisão  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3 mt-3">Lista de divisões da coordenadoria  <a href="{{ route('usuario.adicionarDivisao',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar divisão  <span class="fas fa-plus"></span> </a></h2>
     @if( !$divisoes->isEmpty() )
       <div class="list-group">
         @foreach( $divisoes as $divisao )
@@ -117,11 +133,11 @@ PRAE - Coordenadoria
         Não há divisões cadastradas nesta coordenadoria
       </div>
     @endif
-    <h2 class="mt-5 mb-3">Lista de mapas da coordenadoria  <a href="{{ route('usuario.adicionarMapa',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2" >Adicionar mapa  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3 mt-3">Lista de mapas da coordenadoria  <a href="{{ route('usuario.adicionarMapa',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar mapa  <span class="fas fa-plus"></span> </a></h2>
     @if( !$mapas->isEmpty() )
       <div class="list-group">
         @foreach( $mapas as $mapa )
-          <a class="list-group-item border border-dark">{{ ucfirst($mapa->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarMapa',['id' => $mapa->id]) }}" method="GET"><button class="btn btn-success mr-2">Baixar mapa</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoMapa{{ $mapa->id }}" >Apagar mapa</button> </div>      </a>
+          <a class="list-group-item border border-dark">{{ ucfirst($mapa->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('usuario.baixarMapa',['id' => $mapa->id]) }}" method="GET"><button type="submit" class="btn btn-success mr-2">Baixar mapa</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoMapa{{ $mapa->id }}" >Apagar mapa</button> </div>      </a>
           <div class="modal fade" id="confirmarDelecaoMapa{{ $mapa->id }}">
               <div class="modal-dialog">
                   <div class="modal-content">
