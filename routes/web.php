@@ -32,7 +32,7 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
   Route::get('adicionarCompromisso/{id}','UsuariosController@adicionarCompromisso')->name('usuario.adicionarCompromisso');
   Route::get('adicionarDivisao/{id}','UsuariosController@adicionarDivisao')->name('usuario.adicionarDivisao');
   Route::get('adicionarMapa/{id}','UsuariosController@adicionarMapa')->name('usuario.adicionarMapa');
-  Route::get('adicionarItem','UsuariosController@adicionarItem')->name('usuario.adicionarItem');
+  Route::get('adicionarItem/{id}','UsuariosController@adicionarItem')->name('usuario.adicionarItem');
   Route::get('adicionarCoordenadoria','UsuariosController@adicionarCoordenadoria')->name('usuario.adicionarCoordenadoria');
   /// Confirmar cadastro
   Route::post('confirmarCadastroUsuario','UsuariosController@confirmarCadastroUsuario')->name('usuario.confirmarCadastroUsuario');
@@ -77,7 +77,7 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
 });
 
 Route::get('app/ws/listaCategorias','UsuariosController@listaCategoriasAppWS')->middleware('CORS')->name('usuario.listaCategoriasAppWS');
-Route::get('app/ws/categoria/{id}','UsuariosController@categoriaAppWS')->middleware('CORS')->name('usuario.categoriaAppWS');
+//Route::get('app/ws/categoria/{id}','UsuariosController@categoriaAppWS')->middleware('CORS')->name('usuario.categoriaAppWS');
 Route::post('app/ws/baixarDocumento','UsuariosController@salvarDescricao')->middleware('CORS')->name('usuario.baixarDocumentoAppWS');
 Route::get('app/ws/listaCoordenadorias','UsuariosController@listaCategoriasAppWS')->middleware('CORS')->name('usuario.listaCategoriasAppWS');
-Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');
+//Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');

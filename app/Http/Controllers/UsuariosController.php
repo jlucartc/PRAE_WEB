@@ -11,6 +11,7 @@ use App\Coordenadorias;
 use App\Divisoes;
 use App\Mapas;
 use App\Compromissos;
+use App\Itens;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,55 +46,55 @@ class UsuariosController extends Controller
 
   public function adicionarUsuario(){
 
-    return view('usuario.adicionarUsuario');
+    return view('usuario.adicionar.adicionarUsuario');
 
   }
 
   public function adicionarCategoria(){
 
-    return view('usuario.adicionarCategoria');
+    return view('usuario.adicionar.adicionarCategoria');
 
   }
 
   public function adicionarCoordenadoria(){
 
-    return view('usuario.adicionarCoordenadoria');
+    return view('usuario.adicionar.adicionarCoordenadoria');
 
   }
 
   public function adicionarDescricao($id){
 
-    return view('usuario.adicionarDescricao',['id' => $id]);
+    return view('usuario.adicionar.adicionarDescricao',['id' => $id]);
 
   }
 
   public function adicionarDocumento($id){
 
-    return view('usuario.adicionarDocumento',['id' => $id]);
+    return view('usuario.adicionar.adicionarDocumento',['id' => $id]);
 
   }
 
   public function adicionarCompromisso($id){
 
-    return view('usuario.adicionarCompromisso',['id' => $id]);
+    return view('usuario.adicionar.adicionarCompromisso',['id' => $id]);
 
   }
 
   public function adicionarDivisao($id){
 
-    return view('usuario.adicionarDivisao',['id' => $id]);
+    return view('usuario.adicionar.adicionarDivisao',['id' => $id]);
 
   }
 
   public function adicionarMapa($id){
 
-    return view('usuario.adicionarMapa',['id' => $id]);
+    return view('usuario.adicionar.adicionarMapa',['id' => $id]);
 
   }
 
   public function adicionarItem($id){
 
-    return view('usuario.adicionarItem',['id' => $id]);
+    return view('usuario.adicionar.adicionarItem',['id' => $id]);
 
   }
 
@@ -299,7 +300,7 @@ class UsuariosController extends Controller
 
     ]);
 
-    $item = new Items;
+    $item = new Itens;
 
     $item->nome = $request->nome;
     $item->descricao = $request->descricao;
@@ -318,8 +319,9 @@ class UsuariosController extends Controller
     $categoria = Categorias::find($id);
     $descricoes = Descricoes::where('categoria_id',$categoria->id)->get();
     $documentos = Documentos::where('categoria_id',$categoria->id)->get();
+    $itens = Itens::where('categoria_id',$categoria->id)->get();
 
-    return view('usuario.verCategoria',['categoria' => $categoria,'descricoes' => $descricoes,'documentos' => $documentos]);
+    return view('usuario.ver.verCategoria',['categoria' => $categoria,'descricoes' => $descricoes,'documentos' => $documentos, 'itens' => $itens]);
 
   }
 
@@ -327,7 +329,7 @@ class UsuariosController extends Controller
 
     $usuario = User::find($id);
 
-    return view('usuario.verUsuario',['usuario' => $usuario]);
+    return view('usuario.ver.verUsuario',['usuario' => $usuario]);
 
   }
 
@@ -335,7 +337,7 @@ class UsuariosController extends Controller
 
     $descricao = Descricoes::find($id);
 
-    return view('usuario.verDescricao',['descricao' => $descricao]);
+    return view('usuario.ver.verDescricao',['descricao' => $descricao]);
 
   }
 
@@ -346,7 +348,7 @@ class UsuariosController extends Controller
     $divisoes = Divisoes::where('coordenadoria_id',$id)->get();
     $compromissos = Compromissos::where('coordenadoria_id',$id)->get();
 
-    return view('usuario.verCoordenadoria',['coordenadoria' => $coordenadoria, 'mapas' => $mapas, 'divisoes' => $divisoes, 'compromissos' => $compromissos]);
+    return view('usuario.ver.verCoordenadoria',['coordenadoria' => $coordenadoria, 'mapas' => $mapas, 'divisoes' => $divisoes, 'compromissos' => $compromissos]);
 
   }
 
@@ -356,7 +358,7 @@ class UsuariosController extends Controller
 
     $compromisso->data = explode(' ',$compromisso->data)[0].'T'.explode(' ',$compromisso->data)[1];
 
-    return view('usuario.verCompromisso',['compromisso' => $compromisso]);
+    return view('usuario.ver.verCompromisso',['compromisso' => $compromisso]);
 
   }
 
@@ -364,15 +366,15 @@ class UsuariosController extends Controller
 
     $divisao = Divisoes::find($id);
 
-    return view('usuario.verDivisao',['divisao' => $divisao]);
+    return view('usuario.ver.verDivisao',['divisao' => $divisao]);
 
   }
 
   public function verItem($id){
 
-    $item = Items::find($id);
+    $item = Itens::find($id);
 
-    return redirect()->route('usuario.verItem',['item' => $item]);
+    return view('usuario.ver.verItem',['item' => $item]);
 
   }
 
@@ -382,9 +384,9 @@ class UsuariosController extends Controller
 
     Categorias::find($request->id)->delete();
 
-    Documentos::where('categoria_id',$request->id)->get()->delete();
+    Documentos::where('categoria_id',$request->id)->delete();
 
-    Descricoes::where('categoria_id',$request->id)->get()->delete();
+    Descricoes::where('categoria_id',$request->id)->delete();
 
     return redirect()->route('usuario.categorias');
 
@@ -488,7 +490,7 @@ class UsuariosController extends Controller
 
   public function deletarItem(Request $request){
 
-    $item = Items::find($request->id);
+    $item = Itens::find($request->id);
 
     $id = $item->categoria_id;
 
@@ -520,7 +522,7 @@ class UsuariosController extends Controller
 
     $usuario->save();
 
-    return redirect()->route('usuario.usuarios');
+    return redirect()->route('usuario.verUsuario',['id' => $usuario->id]);
 
   }
 
@@ -530,11 +532,11 @@ class UsuariosController extends Controller
 
       'nome' => 'required|string',
       'responsavel' => 'required|string',
-      'email' => 'required|string',
-      'fone' => 'required|string',
-      'bairro' => 'required|string',
-      'rua' => 'required|string',
-      'numero' => 'required|string'
+      'email' => 'nullable|string',
+      'fone' => 'nullable|string',
+      'bairro' => 'nullable|string',
+      'rua' => 'nullable|string',
+      'numero' => 'nullable|string'
 
     ]);
 
@@ -543,14 +545,14 @@ class UsuariosController extends Controller
     $categoria->nome = $request->nome;
     $categoria->responsavel = $request->responsavel;
     $categoria->email = $request->email;
-    $categoria->fone = $request->bairro;
+    $categoria->fone = $request->fone;
     $categoria->bairro = $request->bairro;
     $categoria->rua = $request->rua;
     $categoria->numero = $request->numero;
 
     $categoria->save();
 
-    return redirect()->route('usuario.categorias');
+    return redirect()->route('usuario.verCategoria',['id' => $categoria->id]);
 
   }
 
@@ -570,7 +572,7 @@ class UsuariosController extends Controller
 
     $descricao->save();
 
-    return redirect()->route('usuario.verCategoria',['id' => $descricao->id]);
+    return redirect()->route('usuario.verDescricao',['id' => $descricao->id]);
 
 
   }
@@ -629,7 +631,7 @@ class UsuariosController extends Controller
 
     $compromisso->save();
 
-    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+    return redirect()->route('usuario.verCompromisso',['id' => $request->id]);
 
   }
 
@@ -684,14 +686,14 @@ class UsuariosController extends Controller
 
     ]);
 
-    $item = Items::find($request->id);
+    $item = Itens::find($request->id);
 
     $item->nome = ($item->nome == $request->nome) ? $item->nome : $request->nome;
     $item->descricao = ($item->descricao == $request->descricao) ? $item->descricao : $request->descricao;
 
     $item->save();
 
-    return redirect()->route('usuario.verCategoria',['id' => $item->categoria_id]);
+    return redirect()->route('usuario.verItem',['id' => $request->id]);
 
   }
 
@@ -726,10 +728,21 @@ class UsuariosController extends Controller
 
     $categorias = Categorias::all();
 
-    $categorias->ids = $categorias->pluck('id');
-    $categorias->nomes = $categorias->pluck('nome');
+    //$categorias->ids = $categorias->pluck('id');
+    //$categorias->nomes = $categorias->pluck('nome');
 
-    return response()->json(["ids" => $categorias->ids, "nomes" => $categorias->nomes])->withHeaders([
+    foreach($categorias as $categoria){
+
+      $categoria->descricoes = Descricoes::where('categoria_id',$categoria->id)->get();
+
+      $categoria->itens = Itens::where('categoria_id',$categoria->id)->get();
+
+      $categoria->documentos = Documentos::where('categoria_id',$categoria->id)->get();
+
+    }
+
+
+    return response()->json($categorias)->withHeaders([
       "Access-Control-Allow-Origin" => "*",
       "Acess-Control-Allow-Methods" => "GET",
       "Accept" => "application/json",

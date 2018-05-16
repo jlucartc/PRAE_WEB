@@ -109,7 +109,7 @@ PRAE - Coordenadoria
             </div>
         </div>
     </div>
-    <h2 class="mt-5 mb-3">Lista de compromissos da coordenadoria  <a href="{{ route('usuario.adicionarCompromisso',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar compromisso  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3">Lista de compromissos<a href="{{ route('usuario.adicionarCompromisso',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar compromisso  <span class="fas fa-plus"></span> </a></h2>
     @if( !$compromissos->isEmpty() )
       <div class="list-group">
         @foreach( $compromissos as $compromisso )
@@ -121,7 +121,7 @@ PRAE - Coordenadoria
         Não há compromissos registrados nesta coordenadoria
       </div>
     @endif
-    <h2 class="mt-5 mb-3 mt-3">Lista de divisões da coordenadoria  <a href="{{ route('usuario.adicionarDivisao',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar divisão  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3 mt-3">Lista de divisões<a href="{{ route('usuario.adicionarDivisao',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar divisão  <span class="fas fa-plus"></span> </a></h2>
     @if( !$divisoes->isEmpty() )
       <div class="list-group">
         @foreach( $divisoes as $divisao )
@@ -133,7 +133,7 @@ PRAE - Coordenadoria
         Não há divisões cadastradas nesta coordenadoria
       </div>
     @endif
-    <h2 class="mt-5 mb-3 mt-3">Lista de mapas da coordenadoria  <a href="{{ route('usuario.adicionarMapa',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar mapa  <span class="fas fa-plus"></span> </a></h2>
+    <h2 class="mt-5 mb-3 mt-3">Lista de mapas<a href="{{ route('usuario.adicionarMapa',['id' => $coordenadoria->id]) }}" class="btn btn-secondary mr-2 float-right" >Adicionar mapa  <span class="fas fa-plus"></span> </a></h2>
     @if( !$mapas->isEmpty() )
       <div class="list-group">
         @foreach( $mapas as $mapa )
