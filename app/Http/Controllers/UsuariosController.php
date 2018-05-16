@@ -751,6 +751,33 @@ class UsuariosController extends Controller
 
     }
 
+  public function listaCoordenadoriasAppWS(){
+
+    $coordenadorias = Coordenadorias::all();
+
+    //$categorias->ids = $categorias->pluck('id');
+    //$categorias->nomes = $categorias->pluck('nome');
+
+    foreach($coordenadorias as $coordenadoria){
+
+      $coordenadoria->compromissos = Compromissos::where('coordenadoria_id',$coordenadoria->id)->get();
+
+      $coordenadoria->divisoes = Divisoes::where('coordenadoria_id',$coordenadoria->id)->get();
+
+      $coordenadoria->mapas = Mapas::where('coordenadoria_id',$coordenadoria->id)->get();
+
+    }
+
+
+    return response()->json($coordenadorias)->withHeaders([
+      "Access-Control-Allow-Origin" => "*",
+      "Acess-Control-Allow-Methods" => "GET",
+      "Accept" => "application/json",
+      "content-type" => "application/json"
+    ]);
+
+  }
+
   public function categoriaAppWS($id){
 
     $categorias = Categorias::all();
