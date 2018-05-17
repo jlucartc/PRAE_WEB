@@ -120,7 +120,7 @@ class UsuariosController extends Controller
 
     $usuario->save();
 
-    return redirect()->route('usuario.usuarios');
+    return redirect()->route('usuario.adicionarUsuario',['id' => $request->id])->with('mensagem','Usuário adicionado com sucesso!');
 
   }
 
@@ -152,45 +152,7 @@ class UsuariosController extends Controller
 
     $categoria->save();
 
-    return redirect()->route('usuario.categorias');
-
-  }
-
-  public function confirmarCadastroDescricao(Request $request){
-
-    $request->validate([
-
-      'titulo' => 'required|string',
-      'texto' => 'required|string',
-      'id' => 'required|integer'
-
-    ]);
-
-    $descricao = new Descricoes;
-
-    $descricao->titulo = $request->titulo;
-    $descricao->texto = $request->texto;
-    $descricao->categoria_id = $request->id;
-
-    $descricao->save();
-
-    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
-
-  }
-
-  public function confirmarCadastroDocumento(Request $request){
-
-    $path = Storage::disk('documentos_prae')->putFileAs($request->id,$request->file('arquivo'),$request->nome);
-
-    $documento = new Documentos;
-
-    $documento->nome = $request->nome;
-    $documento->rota = $path;
-    $documento->categoria_id = $request->id;
-
-    $documento->save();
-
-    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
+    return redirect()->route('usuario.adicionarCategoria',['id' => $request->id])->with('mensagem','Categoria adicionada com sucesso!');
 
   }
 
@@ -216,7 +178,47 @@ class UsuariosController extends Controller
 
     $coordenadoria->save();
 
-    return redirect()->route('usuario.coordenadorias');
+    return redirect()->route('usuario.adicionarCoordenadoria',['id' => $request->id])->with('mensagem','Coordenadoria adicionada com sucesso!');
+
+  }
+
+  public function confirmarCadastroDescricao(Request $request){
+
+    $request->validate([
+
+      'titulo' => 'required|string',
+      'texto' => 'required|string',
+      'id' => 'required|integer'
+
+    ]);
+
+    $descricao = new Descricoes;
+
+    $descricao->titulo = $request->titulo;
+    $descricao->texto = $request->texto;
+    $descricao->categoria_id = $request->id;
+
+    $descricao->save();
+
+    return redirect()->route('usuario.adicionarDescricao',['id' => $request->id])->with('mensagem','Descrição adicionada com sucesso!');
+
+  }
+
+  public function confirmarCadastroDocumento(Request $request){
+
+    $nome = ( $request->nome == NULL ) ? $request->arquivo->getClientOriginalName() : $request->nome ;
+
+    $path = Storage::disk('documentos_prae')->putFileAs($request->id,$request->file('arquivo'),$nome);
+
+    $documento = new Documentos;
+
+    $documento->nome = $nome;
+    $documento->rota = $path;
+    $documento->categoria_id = $request->id;
+
+    $documento->save();
+
+    return redirect()->route('usuario.adicionarDocumento',['id' => $request->id])->with('mensagem','Documento adicionado com sucesso!');
 
   }
 
@@ -237,7 +239,7 @@ class UsuariosController extends Controller
 
     $compromisso->save();
 
-    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+    return redirect()->route('usuario.adicionarCompromisso',['id' => $request->id])->with('mensagem','Compromisso adicionado com sucesso!');
 
   }
 
@@ -262,7 +264,7 @@ class UsuariosController extends Controller
 
     $mapa->save();
 
-    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+    return redirect()->route('usuario.adicionarMapa',['id' => $request->id])->with('mensagem','Mapa adicionado com sucesso!');
 
   }
 
@@ -287,7 +289,7 @@ class UsuariosController extends Controller
 
     $divisao->save();
 
-    return redirect()->route('usuario.verCoordenadoria',['id' => $request->id]);
+    return redirect()->route('usuario.adicionarDivisao',['id' => $request->id])->with('mensagem','Divisão adicionada com sucesso!');
 
   }
 
@@ -296,19 +298,19 @@ class UsuariosController extends Controller
     $request->validate([
 
       'nome' => 'required|string',
-      'descricao' => 'required|string'
+      'descricao' => 'nullable|string'
 
     ]);
 
     $item = new Itens;
 
     $item->nome = $request->nome;
-    $item->descricao = $request->descricao;
+    $item->decricao = $request->descricao;
     $item->categoria_id = $request->id;
 
     $item->save();
 
-    return redirect()->route('usuario.verCategoria',['id' => $request->id]);
+    return redirect()->route('usuario.adicionarItem',['id' => $request->id])->with('mensagem','Item adicionado com sucesso!');
 
   }
 
@@ -384,9 +386,15 @@ class UsuariosController extends Controller
 
     Categorias::find($request->id)->delete();
 
-    Documentos::where('categoria_id',$request->id)->delete();
+    $documentos = Documentos::where('categoria_id',$request->id)->get();
 
-    Descricoes::where('categoria_id',$request->id)->delete();
+    $descricoes = Descricoes::where('categoria_id',$request->id)->get();
+
+    foreach($documentos as $documento){
+
+      Storage::disk('documentos_prae')->delete('/'.$documento->rota);
+
+    }
 
     return redirect()->route('usuario.categorias');
 
@@ -768,8 +776,7 @@ class UsuariosController extends Controller
 
     }
 
-
-    return response()->json($coordenadorias)->withHeaders([
+    return response()->json([$coordenadorias])->withHeaders([
       "Access-Control-Allow-Origin" => "*",
       "Acess-Control-Allow-Methods" => "GET",
       "Accept" => "application/json",

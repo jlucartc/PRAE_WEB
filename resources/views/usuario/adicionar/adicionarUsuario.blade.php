@@ -6,8 +6,25 @@ PRAE - Adicionar usuário
 
 @section('conteudo')
 @include('nav')
+
+@if(isset($mensagem))
+<div class="mt-5 pt-5 alert alert-success alert-dismissable">
+  {{ $mensagem }}
+</div>
+@endif
+
 <div class="row justify-content-center">
   <div class="mt-5 pt-5 col-sm-10">
+
+    @if(session('mensagem') != NULL )
+    <div class="mt-5 alert alert-success alert-dismissable">
+      {{ session('mensagem') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
       <div class="card">
         <div class="card-header">
             <h2>Cadastrar usuário</h2>
@@ -22,7 +39,7 @@ PRAE - Adicionar usuário
               <input class="form-control mb-3" type="password" name="senha_confirmation" value="" placeholder="Confirmar senha">
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-success mr-2" name="button" title="confirmar cadastro">Cadastrar</button><button type="button" class="btn btn-danger"name="button" title="cancelar cadastro">Cancelar</button>
+          <button type="submit" class="btn btn-success mr-2" name="button" title="confirmar cadastro">Cadastrar</button><a href="{{ route('usuario.usuarios') }}" class="btn btn-danger"name="button" title="cancelar cadastro">Cancelar</a>
           </form>
         </div>
       </div>

@@ -6,15 +6,19 @@ PRAE - Adicionar coordenadoria
 
 @section('conteudo')
 @include('nav')
+
 <div class="row justify-content-center">
   <div class="mt-5 pt-5 col-sm-10">
-      @if($errors->any())
-        @foreach($errors->all() as $error)
-          <div class="alert alert-warning">
-              {{ $error }}
-          </div>
-        @endforeach
-      @endif
+
+    @if(session('mensagem') != NULL )
+    <div class="mt-5 alert alert-success alert-dismissable">
+      {{ session('mensagem') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
       <div class="card">
         <div class="card-header">
             <h2>Cadastrar coordenadoria</h2>

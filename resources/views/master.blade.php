@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" >
     <title>@yield('titulo')</title>
   </head>
   <body>
