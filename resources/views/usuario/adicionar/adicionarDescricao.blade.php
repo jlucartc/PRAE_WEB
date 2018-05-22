@@ -31,7 +31,7 @@
               <input class="form-control" type="hidden" name="id" value="{{ $id }}">
       </div>
       <div class="card-footer">
-            <button class="btn btn-success mr-2" type="submit" name="button" title="salvar descrição" >Salvar descrição</button><button class="btn btn-primary"type="button" name="button" title="cancelar mudanças e voltar">Cancelar</button>
+            <button class="btn btn-success mr-2" type="submit" name="button" title="salvar descrição" >Salvar descrição</button><a href="{{ route('usuario.verCoordenadoria',['id' => $id]) }}" class="btn btn-primary" name="button" title="cancelar mudanças e voltar">Cancelar</a>
           </form>
       </div>
     </div>

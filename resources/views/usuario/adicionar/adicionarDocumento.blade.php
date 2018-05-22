@@ -37,6 +37,7 @@
       </div>
       <div class="card-footer">
             <button class="btn btn-success" type="submit" name="button" title="enviar documento">Enviar</button>
+            <a href="{{ route('usuario.verCategoria',['id' => $id]) }}" class="btn btn-danger">Cancelar</a>
         </form>
       </div>
     </div>
