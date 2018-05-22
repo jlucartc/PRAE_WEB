@@ -305,7 +305,7 @@ class UsuariosController extends Controller
     $item = new Itens;
 
     $item->nome = $request->nome;
-    $item->decricao = $request->descricao;
+    $item->descricao = $request->descricao;
     $item->categoria_id = $request->id;
 
     $item->save();
