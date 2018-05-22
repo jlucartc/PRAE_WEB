@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS categorias;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE categorias (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome text NOT NULL,
   tipo_categoria int NOT NULL,
   responsavel text,
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS compromissos;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE compromissos (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   coordenadoria_id bigint NOT NULL,
   titulo text NOT NULL,
   data timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS coordenadorias;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE coordenadorias (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome text NOT NULL,
   coordenador text,
   fone varchar(255) DEFAULT NULL,
@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS descricoes;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE descricoes (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   titulo text NOT NULL,
   texto text NOT NULL,
   categoria_id int NOT NULL,
@@ -140,7 +140,7 @@ DROP TABLE IF EXISTS divisoes;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE divisoes (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome text NOT NULL,
   coordenadoria_id bigint NOT NULL,
   fone varchar(255) DEFAULT NULL,
@@ -169,7 +169,7 @@ DROP TABLE IF EXISTS documentos;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE documentos (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   categoria_id int NOT NULL,
   rota text NOT NULL,
   nome text NOT NULL,
@@ -198,7 +198,7 @@ DROP TABLE IF EXISTS itens;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE itens (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome varchar(255) NOT NULL,
   descricao text,
   categoria_id bigint NOT NULL,
@@ -227,7 +227,7 @@ DROP TABLE IF EXISTS mapas;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE mapas (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome text NOT NULL,
   coordenadoria_id bigint NOT NULL,
   rota text NOT NULL,
@@ -255,7 +255,7 @@ DROP TABLE IF EXISTS migrations;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE migrations (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   migration varchar(255) NOT NULL,
   batch int NOT NULL,
   PRIMARY KEY ("id")
@@ -306,7 +306,7 @@ DROP TABLE IF EXISTS usuarios;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE usuarios (
-  id int SERIAL NOT NULL,
+  id BIGSERIAL NOT NULL,
   nome varchar(255) NOT NULL,
   email varchar(255) UNIQUE NOT NULL,
   usuario varchar(255) NOT NULL,
