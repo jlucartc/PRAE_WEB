@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('title')
+
+PRAE - Coordenadorias
+
 @endsection
 
 
