@@ -12,8 +12,11 @@ use App\Divisoes;
 use App\Mapas;
 use App\Compromissos;
 use App\Itens;
+use App\Noticias;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use HTTP_Request2;
+
 
 class UsuariosController extends Controller
 {
@@ -802,6 +805,20 @@ class UsuariosController extends Controller
       "Accept" => "application/json",
       "content-type" => "application/json"
     ]);;
+
+  }
+
+  public function noticiasAppWS(){
+
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+    $noticias = Noticias::all();
+
+    //$noticias = $noticias->slice(($noticias->count()-10));
+
+    return response()->json($noticias);
 
   }
 

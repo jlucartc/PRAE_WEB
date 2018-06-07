@@ -11,7 +11,6 @@ class SiteController extends Controller
 {
 
     public function telaLogin(){
-
       return view('login');
 
     }

@@ -80,4 +80,6 @@ Route::get('app/ws/listaCategorias','UsuariosController@listaCategoriasAppWS')->
 //Route::get('app/ws/categoria/{id}','UsuariosController@categoriaAppWS')->middleware('CORS')->name('usuario.categoriaAppWS');
 Route::post('app/ws/baixarDocumento','UsuariosController@salvarDescricao')->middleware('CORS')->name('usuario.baixarDocumentoAppWS');
 Route::get('app/ws/listaCoordenadorias','UsuariosController@listaCoordenadoriasAppWS')->middleware('CORS')->name('usuario.listaCategoriasAppWS');
+Route::get('feed','UsuariosController@feed')->name('usuario.feed');
+Route::get('app/ws/noticias','UsuariosController@noticiasAppWS')->middleware('CORS')->name('usuario.noticiasAppWS');
 //Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');
