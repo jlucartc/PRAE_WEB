@@ -67,12 +67,16 @@ class MonitorarFeed implements ShouldQueue
 
           $dataBuilder = new PayloadDataBuilder();
 
+          $dataBuilder->addData([
+	            'guid' => $noticia->guid
+          ]);
+
           $option = $optionBuilder->build();
           $notification = $notificationBuilder->build();
           $data = $dataBuilder->build();
 
           // You must change it to get your tokens
-          $token = "AAAA3Y8d3c4:APA91bGwu4OA7VcUg5mpz4oBM5lHtQER8s_tjVTegcNgmLoKDmVFJjRwj-ma9xkih3b1IU-8ZdZGYKFiLLNX2ae3LwpBXiReOWD4ooL742Yd63BWDj_kGVi5ipxjE9z_h1PpbanI3zyN";
+          $token = "eKJecO-b2ps:APA91bHsQ76zr7DaB5999WKLd0f3LjMfSEt4oSwxC4161mgeu4rFS_CuLJUn51jYwMtKjGxrk-rdgao9VTaEZ5maHMPvjszhgAGckxs4vGPQ2AmIsSTnHNoBJX3PdbyI9MPahs3ajOaH";
 
           $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
 
