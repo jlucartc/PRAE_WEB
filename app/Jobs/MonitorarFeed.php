@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Noticias;
+use App\ReceiverID;
 use HTTP_Request2;
 use Illuminate\Support\Facades\Log;
 use LaravelFCM\Message\OptionsBuilder;
@@ -68,7 +69,8 @@ class MonitorarFeed implements ShouldQueue
           $dataBuilder = new PayloadDataBuilder();
 
           $dataBuilder->addData([
-	            'guid' => $noticia->guid
+	            'guid' => $noticia->guid,
+              'content-available' => 1
           ]);
 
           $option = $optionBuilder->build();
@@ -76,8 +78,7 @@ class MonitorarFeed implements ShouldQueue
           $data = $dataBuilder->build();
 
           // You must change it to get your tokens
-          $token = "eKJecO-b2ps:APA91bHsQ76zr7DaB5999WKLd0f3LjMfSEt4oSwxC4161mgeu4rFS_CuLJUn51jYwMtKjGxrk-rdgao9VTaEZ5maHMPvjszhgAGckxs4vGPQ2AmIsSTnHNoBJX3PdbyI9MPahs3ajOaH";
-
+          $token = ReceiverID::first()->receiverID;
           $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
 
           if($downstreamResponse->numberFailure() > 0){

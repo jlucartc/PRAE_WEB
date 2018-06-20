@@ -76,10 +76,11 @@ Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
 
 });
 
-Route::get('app/ws/listaCategorias','UsuariosController@listaCategoriasAppWS')->middleware('CORS')->name('usuario.listaCategoriasAppWS');
+Route::get('app/ws/listaCategorias','WebServiceController@listaCategoriasAppWS')->middleware('CORS')->name('ws.listaCategoriasAppWS');
 //Route::get('app/ws/categoria/{id}','UsuariosController@categoriaAppWS')->middleware('CORS')->name('usuario.categoriaAppWS');
-Route::post('app/ws/baixarDocumento','UsuariosController@salvarDescricao')->middleware('CORS')->name('usuario.baixarDocumentoAppWS');
-Route::get('app/ws/listaCoordenadorias','UsuariosController@listaCoordenadoriasAppWS')->middleware('CORS')->name('usuario.listaCategoriasAppWS');
-Route::get('feed','UsuariosController@feed')->name('usuario.feed');
-Route::get('app/ws/noticias','UsuariosController@noticiasAppWS')->middleware('CORS')->name('usuario.noticiasAppWS');
+Route::post('app/ws/baixarDocumento','WebServiceController@salvarDescricao')->middleware('CORS')->name('ws.baixarDocumentoAppWS');
+Route::get('app/ws/listaCoordenadorias','WebServiceController@listaCoordenadoriasAppWS')->middleware('CORS')->name('ws.listaCategoriasAppWS');
+Route::get('feed','WebServiceController@feed')->name('ws.feed');
+Route::get('app/ws/noticias','WebServiceController@noticiasAppWS')->middleware('CORS')->name('ws.noticiasAppWS');
 //Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');
+Route::post('app/ws/atualizarReceiverID','WebServiceController@atualizarReceiverID')->middleware('CORS')->name('ws.atualizarReceiverID');
