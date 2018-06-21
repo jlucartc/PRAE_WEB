@@ -17,7 +17,7 @@ class Cors
     public function handle($request, Closure $next)
     {
 
-        if($request->getMethod() == "GET"){
+        if($request->getMethod() == "GET" || $request->getMethod() == "POST"){
 
           return $next($request);
 

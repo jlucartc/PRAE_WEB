@@ -45,6 +45,8 @@ class MonitorarFeed implements ShouldQueue
 
     try{
 
+      Log::info("MonitorarFeed executado!");
+
       $xml = simplexml_load_string($res->getBody());
 
       $xml = json_decode(json_encode($xml),true);
@@ -79,6 +81,9 @@ class MonitorarFeed implements ShouldQueue
 
           // You must change it to get your tokens
           $token = ReceiverID::first()->receiverID;
+
+          Log::info("Token ID: ".$token);
+
           $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
 
           if($downstreamResponse->numberFailure() > 0){

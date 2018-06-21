@@ -16,6 +16,7 @@ use App\Noticias;
 use App\ReceiverID;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use HTTP_Request2;
 
 class WebServiceController extends Controller
@@ -101,6 +102,8 @@ class WebServiceController extends Controller
 
   public function noticiasAppWS(){
 
+    Log::info('noticias');
+
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
@@ -115,15 +118,19 @@ class WebServiceController extends Controller
 
   public function atualizarReceiverID(Request $request){
 
+    Log::info("receiverID: ".$request->receiverID);
+
     $id = $request->receiverID;
 
     $receiverID = ReceiverID::first();
 
-    if(is_null($receiverID)){
+    if(is_null($receiverID) || $receiverID->count() == 0){
 
       $receiverID = new ReceiverID();
 
       $receiverID->receiverID = $request->receiverID;
+
+      $receiverID->save();
 
     }else{
 
