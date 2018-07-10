@@ -109,6 +109,7 @@ class WebServiceController extends Controller
     header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
     $noticias = Noticias::all();
+    //$noticias = $noticias->sortByDesc('id');
 
     //$noticias = $noticias->slice(($noticias->count()-10));
 

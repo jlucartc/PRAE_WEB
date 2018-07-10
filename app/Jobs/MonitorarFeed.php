@@ -53,6 +53,8 @@ class MonitorarFeed implements ShouldQueue
 
       $itens = $xml['channel']['item'];
 
+      $itens = array_reverse($itens);
+
       foreach($itens as $item){
 
         if(Noticias::where('guid',$item['guid'])->get()->count() == 0){
@@ -63,7 +65,7 @@ class MonitorarFeed implements ShouldQueue
           $noticia->guid = $item['guid'];
           $status = $noticia->save();
 
-          $optionBuilder = new OptionsBuilder();
+          /*$optionBuilder = new OptionsBuilder();
 
           $notificationBuilder = new PayloadNotificationBuilder('Nova notícia');
           $notificationBuilder->setBody($noticia->titulo)->setSound('default');
@@ -90,7 +92,7 @@ class MonitorarFeed implements ShouldQueue
 
             $downstreamResponse->tokensToRetry($token);
 
-          }
+          }*/
 
         }
 
