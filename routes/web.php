@@ -83,4 +83,5 @@ Route::get('app/ws/listaCoordenadorias','WebServiceController@listaCoordenadoria
 Route::get('feed','WebServiceController@feed')->name('ws.feed');
 Route::get('app/ws/noticias','WebServiceController@noticiasAppWS')->middleware('CORS')->name('ws.noticiasAppWS');
 //Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');
+Route::get('app/ws/listaCompromissos','WebServiceController@listaCompromissosAppWS')->middleware('CORS')->name('ws.listaCompromissosAppWS');
 Route::post('app/ws/atualizarReceiverID','WebServiceController@atualizarReceiverID')->middleware('CORS')->name('ws.atualizarReceiverID');

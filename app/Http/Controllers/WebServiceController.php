@@ -117,6 +117,15 @@ class WebServiceController extends Controller
 
   }
 
+  public function listaCompromissosAppWS(Request $request){
+
+    $compromissos = Compromissos::all();
+
+    return response()->json($compromissos);
+
+  }
+
+
   public function atualizarReceiverID(Request $request){
 
     Log::info("receiverID: ".$request->receiverID);
