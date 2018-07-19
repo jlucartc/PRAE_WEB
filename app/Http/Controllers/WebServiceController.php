@@ -153,4 +153,78 @@ class WebServiceController extends Controller
     return redirect()->route("index");
 
   }
+
+  public function bolsas(Request $request){
+
+    $bolsas = Categorias::where('tipo_categoria',1)->get();
+
+    return response()->json($bolsas);
+
+  }
+
+  public function auxilios(Request $request){
+
+    $auxilios = Categorias::where('tipo_categoria',2)->get();
+
+    return response()->json($auxilios);
+
+  }
+
+  public function documentos(Request $request){
+
+    $documentos = Documentos::all();
+
+    return response()->json($documentos);
+
+  }
+
+  public function restauranteUniversitario(Request $request){
+
+    $restauranteUniversitario = 5;
+
+    $descricoes = Descricoes::where('categoria_id',$restauranteUniversitario)->get();
+
+    $itens = Itens::where('categoria_id',$restauranteUniversitario)->get();
+
+    $documentos = Documentos::where('categoria_id',$restauranteUniversitario)->get();
+
+    return response()->json(['descricoes' => $descricoes,'itens' => $itens,'documentos' => $documentos]);
+
+  }
+
+  public function ajudaDeCusto(Request $request){
+
+    $ajudaDeCustoId = 3;
+
+    $descricoes = Descricoes::where('categoria_id',$ajudaDeCustoId)->get();
+
+    $itens = Itens::where('categoria_id',$ajudaDeCustoId)->get();
+
+    $documentos = Documentos::where('categoria_id',$ajudaDeCustoId)->get();
+
+    return response()->json(['descricoes' => $descricoes,'itens' => $itens,'documentos' => $documentos]);
+
+  }
+
+  public function mapas(Request $request){
+
+    $mapas = Mapas::all();
+
+    return response()->json($mapas);
+
+  }
+
+  public function acolhimentoAoEstudante(Request $request){
+
+    ////
+
+  }
+
+  public function mostrarMapa($id,$nome){
+
+    return response()->file(storage_path()."/app/mapas_prae/".$id."/".$nome);
+
+  }
+
+
 }

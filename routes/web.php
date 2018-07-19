@@ -85,3 +85,12 @@ Route::get('app/ws/noticias','WebServiceController@noticiasAppWS')->middleware('
 //Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');
 Route::get('app/ws/listaCompromissos','WebServiceController@listaCompromissosAppWS')->middleware('CORS')->name('ws.listaCompromissosAppWS');
 Route::post('app/ws/atualizarReceiverID','WebServiceController@atualizarReceiverID')->middleware('CORS')->name('ws.atualizarReceiverID');
+Route::get('app/ws/bolsas','WebServiceController@bolsas')->middleware('CORS')->name('ws.bolsasAppWS');
+Route::get('app/ws/auxilios','WebServiceController@auxilios')->middleware('CORS')->name('ws.auxiliosAppWS');
+Route::get('app/ws/documentos','WebServiceController@documentos')->middleware('CORS')->name('ws.documentosAppWS');
+Route::get('app/ws/restauranteUniversitario','WebServiceController@restauranteUniversitario')->middleware('CORS')->name('ws.restauranteUniversitarioAppWS');
+Route::get('app/ws/ajudaDeCusto','WebServiceController@ajudaDeCusto')->middleware('CORS')->name('ws.ajudaDeCustoAppWS');
+Route::get('app/ws/acolhimentoAoEstudante','WebServiceController@acolhimentoAoEstudante')->middleware('CORS')->name('ws.acolhimentoAoEstudanteAppWS');
+Route::get('app/ws/mapas','WebServiceController@mapas')->middleware('CORS')->name('ws.mapasAppWS');
+Route::get('mostrarMapa/{id}/{nome}','WebServiceController@mostrarMapa')->middleware('CORS')->name('ws.mostrarMapaAppWS');
+Route::get('mostrarDocumento/{id}/{nome}','WebServiceController@mostrarDocumento')->middleware('CORS')->name('ws.mostrarDocumentoAppWS');
