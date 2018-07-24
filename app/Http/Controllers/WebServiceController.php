@@ -167,9 +167,11 @@ class WebServiceController extends Controller
 
   }
 
-  public function mostrarMapaAppWS($id,$nome){
+  public function mostrarMapaAppWS($id){
 
-    return response()->file(storage_path()."/app/mapas_prae/".$id."/".$nome);
+    $nome = Mapas::find($id)->nome;
+
+    return response()->file(storage_path()."/app/mapas_prae/".$nome);
 
   }
 

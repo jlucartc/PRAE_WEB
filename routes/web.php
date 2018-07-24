@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::post('login','SiteExternoController@login')->name('login');
 Route::get('logout','SiteExternoController@logout')->name('logout');
 
-Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
+Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
 
   /// Páginas principais
 
@@ -127,4 +127,4 @@ Route::get('app/ws/servicos','WebServiceController@servicosAppWS')->middleware('
 //Route::get('app/ws/documentos','WebServiceController@documentosAppWS')->middleware('CORS')->name('ws.documentosAppWS');
 Route::get('app/ws/paragrafo/{id}','WebServiceController@paragrafoAppWS')->middleware('CORS')->name('ws.paragrafosAppWS');
 Route::get('app/ws/mapas','WebServiceController@mapasAppWS')->middleware('CORS')->name('ws.mapasAppWS');
-Route::get('mostrarMapa/{id}/{nome}','WebServiceController@mostrarMapaAppWS')->middleware('CORS')->name('ws.mostrarMapaAppWS');
+Route::get('mostrarMapa/{id}','WebServiceController@mostrarMapaAppWS')->middleware('CORS')->name('ws.mostrarMapaAppWS');

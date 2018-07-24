@@ -535,7 +535,7 @@ class SistemaController extends Controller
 
     $nome = ( $request->nome == NULL ) ? $request->mapa->getClientOriginalName() : $request->nome ;
 
-    $path = Storage::disk('mapas_prae')->putFileAs($request->id,$request->mapa,$nome);
+    $path = Storage::disk('mapas_prae')->putFileAs("",$request->mapa,$nome);
 
     $mapa = new Mapas;
 
