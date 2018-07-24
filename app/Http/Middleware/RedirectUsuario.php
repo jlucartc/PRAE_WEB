@@ -21,7 +21,7 @@ class RedirectUsuario
 
       if(Auth::check()){
 
-          return redirect()->route('usuario.categorias');
+          return redirect()->route('sistema.bolsas');
 
       }
 

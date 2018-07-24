@@ -16,7 +16,6 @@ class CreateMapasTable extends Migration
         Schema::create('mapas', function (Blueprint $table) {
             $table->increments('id');
             $table->text('nome');
-            $table->biginteger('coordenadoria_id');
             $table->text('rota');
             $table->timestamps();
         });

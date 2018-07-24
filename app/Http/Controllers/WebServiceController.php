@@ -14,6 +14,9 @@ use App\Compromissos;
 use App\Itens;
 use App\Noticias;
 use App\ReceiverID;
+use App\Secoes;
+use App\Listas;
+use App\Paragrafos;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -26,105 +29,6 @@ class WebServiceController extends Controller
       return response()->download(asset('docs').'/'.$request->rota);
 
   }
-
-  public function listaCategoriasAppWS(){
-
-    $categorias = Categorias::all();
-
-    //$categorias->ids = $categorias->pluck('id');
-    //$categorias->nomes = $categorias->pluck('nome');
-
-    foreach($categorias as $categoria){
-
-      $categoria->descricoes = Descricoes::where('categoria_id',$categoria->id)->get();
-
-      $categoria->itens = Itens::where('categoria_id',$categoria->id)->get();
-
-      $categoria->documentos = Documentos::where('categoria_id',$categoria->id)->get();
-
-    }
-
-
-    return response()->json($categorias)->withHeaders([
-      "Access-Control-Allow-Origin" => "*",
-      "Acess-Control-Allow-Methods" => "GET",
-      "Accept" => "application/json",
-      "content-type" => "application/json"
-    ]);
-
-    }
-
-  public function listaCoordenadoriasAppWS(){
-
-    $coordenadorias = Coordenadorias::all();
-
-    //$categorias->ids = $categorias->pluck('id');
-    //$categorias->nomes = $categorias->pluck('nome');
-
-    foreach($coordenadorias as $coordenadoria){
-
-      $coordenadoria->compromissos = Compromissos::where('coordenadoria_id',$coordenadoria->id)->get();
-
-      $coordenadoria->divisoes = Divisoes::where('coordenadoria_id',$coordenadoria->id)->get();
-
-      $coordenadoria->mapas = Mapas::where('coordenadoria_id',$coordenadoria->id)->get();
-
-    }
-
-    return response()->json([$coordenadorias])->withHeaders([
-      "Access-Control-Allow-Origin" => "*",
-      "Acess-Control-Allow-Methods" => "GET",
-      "Accept" => "application/json",
-      "content-type" => "application/json"
-    ]);
-
-  }
-
-  public function categoriaAppWS($id){
-
-    $categorias = Categorias::all();
-
-    foreach($categorias as $categoria){
-
-      $categoria->descricoes = Descricoes::where('categoria_id',$categoria->id)->get();
-      $categoria->documentos = Documentos::where('categoria_id',$categoria->id)->get();
-
-    }
-
-    return response()->json($categorias)->withHeaders([
-      "Access-Control-Allow-Origin" => "*",
-      "Acess-Control-Allow-Methods" => "GET",
-      "Accept" => "application/json",
-      "content-type" => "application/json"
-    ]);;
-
-  }
-
-  public function noticiasAppWS(){
-
-    Log::info('noticias');
-
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
-
-    $noticias = Noticias::all();
-    //$noticias = $noticias->sortByDesc('id');
-
-    //$noticias = $noticias->slice(($noticias->count()-10));
-
-    return response()->json($noticias);
-
-  }
-
-  public function listaCompromissosAppWS(Request $request){
-
-    $compromissos = Compromissos::all();
-
-    return response()->json($compromissos);
-
-  }
-
 
   public function atualizarReceiverID(Request $request){
 
@@ -154,59 +58,108 @@ class WebServiceController extends Controller
 
   }
 
-  public function bolsas(Request $request){
+  public function noticiasAppWS(){
 
-    $bolsas = Categorias::where('tipo_categoria',1)->get();
+    Log::info('noticias');
 
-    return response()->json($bolsas);
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+    $noticias = Noticias::all();
+    //$noticias = $noticias->sortByDesc('id');
+
+    //$noticias = $noticias->slice(($noticias->count()-10));
+
+    return response()->json($noticias);
 
   }
 
-  public function auxilios(Request $request){
+  public function paragrafoAppWS($id){
+
+    $paragrafo = Paragrafos::find($id);
+
+    $paragrafo->listas = Listas::where('paragrafo_id',$paragrafo->id)->get();
+
+    $paragrafo->listas->each(function($item,$key){
+
+        $item->itens = Itens::where('lista_id',$item->id)->get();
+
+    });
+
+    return response()->json($paragrafo);
+
+  }
+
+  public function secaoAppWS($id){
+
+      $secao = Secoes::find($id);
+
+      $secao->each(function($item,$key){
+
+        $item->paragrafos = Paragrafos::where('secao_id',$item->id)->get();
+
+      });
+
+  }
+
+  public function auxiliosAppWS(Request $request){
 
     $auxilios = Categorias::where('tipo_categoria',2)->get();
+
+    $auxilios->each(function($item,$key){
+
+        $item->secoes = Secoes::where('categoria_id',$item->id)->get();
+
+        $item->documentos = Documentos::where('categoria_id',$item->id)->get();
+
+    });
 
     return response()->json($auxilios);
 
   }
 
-  public function documentos(Request $request){
+  public function servicosAppWS(Request $request){
 
-    $documentos = Documentos::all();
+    $servicos = Categorias::where('tipo_categoria',3)->get();
 
-    return response()->json($documentos);
+    $servicos->each(function($item,$key){
 
-  }
+        $item->secoes = Secoes::where('categoria_id',$item->id)->get();
 
-  public function restauranteUniversitario(Request $request){
+        $item->documentos = Documentos::where('categoria_id',$item->id)->get();
 
-    $restauranteUniversitario = 5;
+    });
 
-    $descricoes = Descricoes::where('categoria_id',$restauranteUniversitario)->get();
-
-    $itens = Itens::where('categoria_id',$restauranteUniversitario)->get();
-
-    $documentos = Documentos::where('categoria_id',$restauranteUniversitario)->get();
-
-    return response()->json(['descricoes' => $descricoes,'itens' => $itens,'documentos' => $documentos]);
+    return response()->json($servicos);
 
   }
 
-  public function ajudaDeCusto(Request $request){
+  public function bolsasAppWS(Request $request){
 
-    $ajudaDeCustoId = 3;
+    $bolsas = Categorias::where('tipo_categoria',1)->get();
 
-    $descricoes = Descricoes::where('categoria_id',$ajudaDeCustoId)->get();
+    $bolsas->each(function($item,$key){
 
-    $itens = Itens::where('categoria_id',$ajudaDeCustoId)->get();
+        $item->secoes = Secoes::where('categoria_id',$item->id)->get();
 
-    $documentos = Documentos::where('categoria_id',$ajudaDeCustoId)->get();
+        $item->documentos = Documentos::where('categoria_id',$item->id)->get();
 
-    return response()->json(['descricoes' => $descricoes,'itens' => $itens,'documentos' => $documentos]);
+    });
+
+    return response()->json($bolsas);
 
   }
 
-  public function mapas(Request $request){
+  public function compromissosAppWS(Request $request){
+
+    $compromissos = Compromissos::all();
+
+    return response()->json($compromissos);
+
+  }
+
+  public function mapasAppWS(Request $request){
 
     $mapas = Mapas::all();
 
@@ -214,17 +167,10 @@ class WebServiceController extends Controller
 
   }
 
-  public function acolhimentoAoEstudante(Request $request){
-
-    ////
-
-  }
-
-  public function mostrarMapa($id,$nome){
+  public function mostrarMapaAppWS($id,$nome){
 
     return response()->file(storage_path()."/app/mapas_prae/".$id."/".$nome);
 
   }
-
 
 }

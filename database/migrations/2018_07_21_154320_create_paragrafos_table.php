@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItensTable extends Migration
+class CreateParagrafosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateItensTable extends Migration
      */
     public function up()
     {
-        Schema::create('itens', function (Blueprint $table) {
+        Schema::create('paragrafos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
-            $table->text('descricao')->nullable();
-            $table->bigInteger('lista_id');
+            $table->string('titulo');
+            $table->string('texto');
+            $table->bigInteger('secao_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateItensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('itens');
+        Schema::dropIfExists('paragrafos');
     }
 }

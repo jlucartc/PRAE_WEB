@@ -15,82 +15,116 @@ Route::get('/', function () {
     return view('login');
 })->middleware('redirectUsuario')->name('index');
 
-Route::post('login','SiteController@login')->name('login');
-Route::get('logout','SiteController@logout')->name('logout');
+Route::post('login','SiteExternoController@login')->name('login');
+Route::get('logout','SiteExternoController@logout')->name('logout');
 
 Route::prefix('usuario')->middleware('redirectLogin')->group(function(){
 
   /// Páginas principais
-  Route::get('coordenadorias','UsuariosController@coordenadorias')->name('usuario.coordenadorias');
-  Route::get('usuarios','UsuariosController@usuarios')->name('usuario.usuarios');
-  Route::get('categorias','UsuariosController@categorias')->name('usuario.categorias');
+
+  /*Route::get('coordenadorias','SistemaController@coordenadorias')->name('sistema.coordenadorias');*/
+  Route::get('usuarios','SistemaController@usuarios')->name('sistema.usuarios');
+  Route::get('bolsas','SistemaController@bolsas')->name('sistema.bolsas');
+  Route::get('auxilios','SistemaController@auxilios')->name('sistema.auxilios');
+  Route::get('servicos','SistemaController@servicos')->name('sistema.servicos');
+  /*Route::get('categorias','SistemaController@categorias')->name('sistema.categorias');*/
+  Route::get('compromissos','SistemaController@compromissos')->name('sistema.compromissos');
+  Route::get('mapas','SistemaController@mapas')->name('sistema.mapas');
+
   /// Adicionar
-  Route::get('adicionarUsuario','UsuariosController@adicionarUsuario')->name('usuario.adicionarUsuario');
-  Route::get('adicionarCategoria','UsuariosController@adicionarCategoria')->name('usuario.adicionarCategoria');
-  Route::get('adicionarDescricao/{id}','UsuariosController@adicionarDescricao')->name('usuario.adicionarDescricao');
-  Route::get('adicionarDocumento/{id}','UsuariosController@adicionarDocumento')->name('usuario.adicionarDocumento');
-  Route::get('adicionarCompromisso/{id}','UsuariosController@adicionarCompromisso')->name('usuario.adicionarCompromisso');
-  Route::get('adicionarDivisao/{id}','UsuariosController@adicionarDivisao')->name('usuario.adicionarDivisao');
-  Route::get('adicionarMapa/{id}','UsuariosController@adicionarMapa')->name('usuario.adicionarMapa');
-  Route::get('adicionarItem/{id}','UsuariosController@adicionarItem')->name('usuario.adicionarItem');
-  Route::get('adicionarCoordenadoria','UsuariosController@adicionarCoordenadoria')->name('usuario.adicionarCoordenadoria');
+  Route::get('adicionarUsuario','SistemaController@adicionarUsuario')->name('sistema.adicionarUsuario');
+  //Route::get('adicionarCategoria','SistemaController@adicionarCategoria')->name('sistema.adicionarCategoria');
+  Route::get('adicionarBolsa','SistemaController@adicionarBolsa')->name('sistema.adicionarBolsa');
+  Route::get('adicionarAuxilio','SistemaController@adicionarAuxilio')->name('sistema.adicionarAuxilio');
+  Route::get('adicionarServico','SistemaController@adicionarServico')->name('sistema.adicionarServico');
+  Route::get('adicionarSecao/{id}','SistemaController@adicionarSecao')->name('sistema.adicionarSecao');
+  Route::get('adicionarParagrafo/{id}','SistemaController@adicionarParagrafo')->name('sistema.adicionarParagrafo');
+  Route::get('adicionarLista/{id}','SistemaController@adicionarLista')->name('sistema.adicionarLista');
+  //Route::get('adicionarDescricao/{id}','SistemaController@adicionarDescricao')->name('sistema.adicionarDescricao');
+  Route::get('adicionarDocumento/{id}','SistemaController@adicionarDocumento')->name('sistema.adicionarDocumento');
+  Route::get('adicionarCompromisso','SistemaController@adicionarCompromisso')->name('sistema.adicionarCompromisso');
+  //Route::get('adicionarDivisao/{id}','SistemaController@adicionarDivisao')->name('sistema.adicionarDivisao');
+  Route::get('adicionarMapa','SistemaController@adicionarMapa')->name('sistema.adicionarMapa');
+  Route::get('adicionarItem/{id}','SistemaController@adicionarItem')->name('sistema.adicionarItem');
+  //Route::get('adicionarCoordenadoria','SistemaController@adicionarCoordenadoria')->name('sistema.adicionarCoordenadoria');
+
   /// Confirmar cadastro
-  Route::post('confirmarCadastroUsuario','UsuariosController@confirmarCadastroUsuario')->name('usuario.confirmarCadastroUsuario');
-  Route::post('confirmarCadastroCategoria','UsuariosController@confirmarCadastroCategoria')->name('usuario.confirmarCadastroCategoria');
-  Route::post('confirmarCadastroDescricao','UsuariosController@confirmarCadastroDescricao')->name('usuario.confirmarCadastroDescricao');
-  Route::post('confirmarCadastroDocumento','UsuariosController@confirmarCadastroDocumento')->name('usuario.confirmarCadastroDocumento');
-  Route::post('confirmarCadastroCoordenadoria','UsuariosController@confirmarCadastroCoordenadoria')->name('usuario.confirmarCadastroCoordenadoria');
-  Route::post('confirmarCadastroCompromisso','UsuariosController@confirmarCadastroCompromisso')->name('usuario.confirmarCadastroCompromisso');
-  Route::post('confirmarCadastroDivisao','UsuariosController@confirmarCadastroDivisao')->name('usuario.confirmarCadastroDivisao');
-  Route::post('confirmarCadastroMapa','UsuariosController@confirmarCadastroMapa')->name('usuario.confirmarCadastroMapa');
-  Route::post('confirmarCadastroItem','UsuariosController@confirmarCadastroItem')->name('usuario.confirmarCadastroItem');
+  Route::post('confirmarCadastroUsuario','SistemaController@confirmarCadastroUsuario')->name('sistema.confirmarCadastroUsuario');
+  //Route::post('confirmarCadastroCategoria','SistemaController@confirmarCadastroCategoria')->name('sistema.confirmarCadastroCategoria');
+  Route::post('confirmarCadastroBolsa','SistemaController@confirmarCadastroBolsa')->name('sistema.confirmarCadastroBolsa');
+  Route::post('confirmarCadastroAuxilio','SistemaController@confirmarCadastroAuxilio')->name('sistema.confirmarCadastroAuxilio');
+  Route::post('confirmarCadastroServico','SistemaController@confirmarCadastroServico')->name('sistema.confirmarCadastroServico');
+  Route::post('confirmarCadastroSecao','SistemaController@confirmarCadastroSecao')->name('sistema.confirmarCadastroSecao');
+  Route::post('confirmarCadastroParagrafo','SistemaController@confirmarCadastroParagrafo')->name('sistema.confirmarCadastroParagrafo');
+  Route::post('confirmarCadastroLista','SistemaController@confirmarCadastroLista')->name('sistema.confirmarCadastroLista');
+  //Route::post('confirmarCadastroDescricao','SistemaController@confirmarCadastroDescricao')->name('sistema.confirmarCadastroDescricao');
+  Route::post('confirmarCadastroDocumento','SistemaController@confirmarCadastroDocumento')->name('sistema.confirmarCadastroDocumento');
+  //Route::post('confirmarCadastroCoordenadoria','SistemaController@confirmarCadastroCoordenadoria')->name('sistema.confirmarCadastroCoordenadoria');
+  Route::post('confirmarCadastroCompromisso','SistemaController@confirmarCadastroCompromisso')->name('sistema.confirmarCadastroCompromisso');
+  //Route::post('confirmarCadastroDivisao','SistemaController@confirmarCadastroDivisao')->name('sistema.confirmarCadastroDivisao');
+  Route::post('confirmarCadastroMapa','SistemaController@confirmarCadastroMapa')->name('sistema.confirmarCadastroMapa');
+  Route::post('confirmarCadastroItem','SistemaController@confirmarCadastroItem')->name('sistema.confirmarCadastroItem');
+
   // Ver
-  Route::get('verUsuario/{id}','UsuariosController@verUsuario')->name('usuario.verUsuario');
-  Route::get('verCategoria/{id}','UsuariosController@verCategoria')->name('usuario.verCategoria');
-  Route::get('verDescricao/{id}','UsuariosController@verDescricao')->name('usuario.verDescricao');
-  Route::get('verCoordenadoria/{id}','UsuariosController@verCoordenadoria')->name('usuario.verCoordenadoria');
-  Route::get('verCompromisso/{id}','UsuariosController@verCompromisso')->name('usuario.verCompromisso');
-  Route::get('verDivisao/{id}','UsuariosController@verDivisao')->name('usuario.verDivisao');
-  Route::get('verItem/{id}','UsuariosController@verItem')->name('usuario.verItem');
+  Route::get('verUsuario/{id}','SistemaController@verUsuario')->name('sistema.verUsuario');
+  //Route::get('verCategoria/{id}','SistemaController@verCategoria')->name('sistema.verCategoria');
+  Route::get('verBolsa/{id}','SistemaController@verBolsa')->name('sistema.verBolsa');
+  Route::get('verAuxilio/{id}','SistemaController@verAuxilio')->name('sistema.verAuxilio');
+  Route::get('verServico/{id}','SistemaController@verServico')->name('sistema.verServico');
+  Route::get('verSecao/{id}','SistemaController@verSecao')->name('sistema.verSecao');
+  Route::get('verParagrafo/{id}','SistemaController@verParagrafo')->name('sistema.verParagrafo');
+  Route::get('verLista/{id}','SistemaController@verLista')->name('sistema.verLista');
+  //Route::get('verDescricao/{id}','SistemaController@verDescricao')->name('sistema.verDescricao');
+  //Route::get('verCoordenadoria/{id}','SistemaController@verCoordenadoria')->name('sistema.verCoordenadoria');
+  Route::get('verCompromisso/{id}','SistemaController@verCompromisso')->name('sistema.verCompromisso');
+  //Route::get('verDivisao/{id}','SistemaController@verDivisao')->name('sistema.verDivisao');
+  Route::get('verItem/{id}','SistemaController@verItem')->name('sistema.verItem');
+
   /// Deletar
-  Route::post('deletarUsuario','UsuariosController@deletarUsuario')->name('usuario.deletarUsuario');
-  Route::post('deletarCategoria','UsuariosController@deletarCategoria')->name('usuario.deletarCategoria');
-  Route::post('deletarDescricao','UsuariosController@deletarDescricao')->name('usuario.deletarDescricao');
-  Route::post('deletarDocumento','UsuariosController@deletarDocumento')->name('usuario.deletarDocumento');
-  Route::post('deletarCoordenadoria','UsuariosController@deletarCoordenadoria')->name('usuario.deletarCoordenadoria');
-  Route::post('deletarCompromisso',"UsuariosController@deletarCompromisso")->name("usuario.deletarCompromisso");
-  Route::post('deletarDivisao',"UsuariosController@deletarDivisao")->name("usuario.deletarDivisao");
-  Route::post('deletarMapa','UsuariosController@deletarMapa')->name('usuario.deletarMapa');
-  Route::post('deletarItem','UsuariosController@deletarItem')->name('usuario.deletarItem');
+  Route::post('deletarUsuario','SistemaController@deletarUsuario')->name('sistema.deletarUsuario');
+  //Route::post('deletarCategoria','SistemaController@deletarCategoria')->name('sistema.deletarCategoria');
+  Route::post('deletarBolsa','SistemaController@deletarBolsa')->name('sistema.deletarBolsa');
+  Route::post('deletarAuxilio','SistemaController@deletarAuxilio')->name('sistema.deletarAuxilio');
+  Route::post('deletarServico','SistemaController@deletarServico')->name('sistema.deletarServico');
+  Route::post('deletarSecao','SistemaController@deletarSecao')->name('sistema.deletarSecao');
+  Route::post('deletarParagrafo','SistemaController@deletarParagrafo')->name('sistema.deletarParagrafo');
+  Route::post('deletarLista','SistemaController@deletarLista')->name('sistema.deletarLista');
+  //Route::post('deletarDescricao','SistemaController@deletarDescricao')->name('sistema.deletarDescricao');
+  Route::post('deletarDocumento','SistemaController@deletarDocumento')->name('sistema.deletarDocumento');
+  //Route::post('deletarCoordenadoria','SistemaController@deletarCoordenadoria')->name('sistema.deletarCoordenadoria');
+  Route::post('deletarCompromisso',"SistemaController@deletarCompromisso")->name("sistema.deletarCompromisso");
+  //Route::post('deletarDivisao',"SistemaController@deletarDivisao")->name("sistema.deletarDivisao");
+  Route::post('deletarMapa','SistemaController@deletarMapa')->name('sistema.deletarMapa');
+  Route::post('deletarItem','SistemaController@deletarItem')->name('sistema.deletarItem');
   /// Salvar
-  Route::post('salvarUsuario','UsuariosController@salvarUsuario')->name('usuario.salvarUsuario');
-  Route::post('salvarCategoria','UsuariosController@salvarCategoria')->name('usuario.salvarCategoria');
-  Route::post('salvarCoordenadoria','UsuariosController@salvarCoordenadoria')->name('usuario.salvarCoordenadoria');
-  Route::post('salvarDescricao','UsuariosController@salvarDescricao')->name('usuario.salvarDescricao');
-  Route::post('salvarCompromisso','UsuariosController@salvarCompromisso')->name('usuario.salvarCompromisso');
-  Route::post('salvarDivisao','UsuariosController@salvarDivisao')->name('usuario.salvarDivisao');
-  Route::post('salvarItem','UsuariosController@salvarItem')->name('usuario.salvarItem');
+  Route::post('salvarUsuario','SistemaController@salvarUsuario')->name('sistema.salvarUsuario');
+  //Route::post('salvarCategoria','SistemaController@salvarCategoria')->name('sistema.salvarCategoria');
+  Route::post('salvarBolsa','SistemaController@salvarBolsa')->name('sistema.salvarBolsa');
+  Route::post('salvarAuxilio','SistemaController@salvarAuxilio')->name('sistema.salvarAuxilio');
+  Route::post('salvarServico','SistemaController@salvarServico')->name('sistema.salvarServico');
+  Route::post('salvarSecao','SistemaController@salvarSecao')->name('sistema.salvarSecao');
+  Route::post('salvarParagrafo','SistemaController@salvarParagrafo')->name('sistema.salvarParagrafo');
+  Route::post('salvarLista','SistemaController@salvarLista')->name('sistema.salvarLista');
+  //Route::post('salvarCoordenadoria','SistemaController@salvarCoordenadoria')->name('sistema.salvarCoordenadoria');
+  //Route::post('salvarDescricao','SistemaController@salvarDescricao')->name('sistema.salvarDescricao');
+  Route::post('salvarCompromisso','SistemaController@salvarCompromisso')->name('sistema.salvarCompromisso');
+  //Route::post('salvarDivisao','SistemaController@salvarDivisao')->name('sistema.salvarDivisao');
+  Route::post('salvarItem','SistemaController@salvarItem')->name('sistema.salvarItem');
   /// Baixar
-  Route::get('baixarDocumento/{id}','UsuariosController@baixarDocumento')->name('usuario.baixarDocumento');
-  Route::get('baixarMapa/{id}','UsuariosController@baixarMapa')->name('usuario.baixarMapa');
+  Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('sistema.baixarDocumento');
+  Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('sistema.baixarMapa');
 
 });
 
-Route::get('app/ws/listaCategorias','WebServiceController@listaCategoriasAppWS')->middleware('CORS')->name('ws.listaCategoriasAppWS');
-//Route::get('app/ws/categoria/{id}','UsuariosController@categoriaAppWS')->middleware('CORS')->name('usuario.categoriaAppWS');
 Route::post('app/ws/baixarDocumento','WebServiceController@salvarDescricao')->middleware('CORS')->name('ws.baixarDocumentoAppWS');
-Route::get('app/ws/listaCoordenadorias','WebServiceController@listaCoordenadoriasAppWS')->middleware('CORS')->name('ws.listaCategoriasAppWS');
 Route::get('feed','WebServiceController@feed')->name('ws.feed');
+Route::get('app/ws/compromissos','WebServiceController@compromissosAppWS')->name('ws.compromissosAppWS');
 Route::get('app/ws/noticias','WebServiceController@noticiasAppWS')->middleware('CORS')->name('ws.noticiasAppWS');
-//Route::get('app/ws/coordenadoria/{id}','UsuariosController@coordenadoriaAppWS')->middleware('CORS')->name('usuario.coordenadoriaAppWS');
-Route::get('app/ws/listaCompromissos','WebServiceController@listaCompromissosAppWS')->middleware('CORS')->name('ws.listaCompromissosAppWS');
 Route::post('app/ws/atualizarReceiverID','WebServiceController@atualizarReceiverID')->middleware('CORS')->name('ws.atualizarReceiverID');
-Route::get('app/ws/bolsas','WebServiceController@bolsas')->middleware('CORS')->name('ws.bolsasAppWS');
-Route::get('app/ws/auxilios','WebServiceController@auxilios')->middleware('CORS')->name('ws.auxiliosAppWS');
-Route::get('app/ws/documentos','WebServiceController@documentos')->middleware('CORS')->name('ws.documentosAppWS');
-Route::get('app/ws/restauranteUniversitario','WebServiceController@restauranteUniversitario')->middleware('CORS')->name('ws.restauranteUniversitarioAppWS');
-Route::get('app/ws/ajudaDeCusto','WebServiceController@ajudaDeCusto')->middleware('CORS')->name('ws.ajudaDeCustoAppWS');
-Route::get('app/ws/acolhimentoAoEstudante','WebServiceController@acolhimentoAoEstudante')->middleware('CORS')->name('ws.acolhimentoAoEstudanteAppWS');
-Route::get('app/ws/mapas','WebServiceController@mapas')->middleware('CORS')->name('ws.mapasAppWS');
-Route::get('mostrarMapa/{id}/{nome}','WebServiceController@mostrarMapa')->middleware('CORS')->name('ws.mostrarMapaAppWS');
-Route::get('mostrarDocumento/{id}/{nome}','WebServiceController@mostrarDocumento')->middleware('CORS')->name('ws.mostrarDocumentoAppWS');
+Route::get('app/ws/bolsas','WebServiceController@bolsasAppWS')->middleware('CORS')->name('ws.bolsasAppWS');
+Route::get('app/ws/auxilios','WebServiceController@auxiliosAppWS')->middleware('CORS')->name('ws.auxiliosAppWS');
+Route::get('app/ws/servicos','WebServiceController@servicosAppWS')->middleware('CORS')->name('ws.servicosAppWS');
+//Route::get('app/ws/documentos','WebServiceController@documentosAppWS')->middleware('CORS')->name('ws.documentosAppWS');
+Route::get('app/ws/paragrafo/{id}','WebServiceController@paragrafoAppWS')->middleware('CORS')->name('ws.paragrafosAppWS');
+Route::get('app/ws/mapas','WebServiceController@mapasAppWS')->middleware('CORS')->name('ws.mapasAppWS');
+Route::get('mostrarMapa/{id}/{nome}','WebServiceController@mostrarMapaAppWS')->middleware('CORS')->name('ws.mostrarMapaAppWS');

@@ -12,9 +12,13 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top">
   <img  class='navbar-brand' width='40px' height='60px' src="{{ asset('ufc.png') }}" alt="logo ufc">
   <div class="navbar-nav">
-    <a href="{{ route('usuario.categorias') }}" class="nav-item nav-link">Categorias</a>
-    <a href="{{ route('usuario.usuarios') }}" class="nav-item nav-link">Usuários</a>
-    <a href="{{ route('usuario.coordenadorias') }}" class="nav-item nav-link">Coordenadorias</a>
+    <a href="{{ route('sistema.bolsas') }}" class="nav-item nav-link">Bolsas</a>
+    <a href="{{ route('sistema.auxilios') }}" class="nav-item nav-link">Auxilios</a>
+    <a href="{{ route('sistema.servicos') }}" class="nav-item nav-link">Serviços</a>
+    <a href="{{ route('sistema.compromissos')}}" class="nav-item nav-link">Atividades</a>
+    <a href="{{ route('sistema.mapas') }}" class="nav-item nav-link">Mapas</a>
+    <a href="{{ route('sistema.usuarios') }}" class="nav-item nav-link">Usuários</a>
+    {{-- <a href="{{ route('sistema.coordenadorias') }}" class="nav-item nav-link">Coordenadorias</a> --}}
     <a href="{{ route('logout') }}" class="nav-item nav-link ml-5">Logout</a>
   </div>
 </nav>

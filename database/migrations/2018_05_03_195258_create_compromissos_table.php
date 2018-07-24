@@ -15,9 +15,9 @@ class CreateCompromissosTable extends Migration
     {
         Schema::create('compromissos', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('coordenadoria_id');
             $table->text('titulo');
             $table->timestamp('data');
+            $table->string('local');
             $table->timestamps();
         });
     }
