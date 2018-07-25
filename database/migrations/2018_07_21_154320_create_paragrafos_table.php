@@ -15,8 +15,8 @@ class CreateParagrafosTable extends Migration
     {
         Schema::create('paragrafos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo');
-            $table->string('texto');
+            $table->text('titulo');
+            $table->text('texto');
             $table->bigInteger('secao_id');
             $table->timestamps();
         });

@@ -67,7 +67,7 @@ PRAE - Ver paragrafo
     @if( !$itens->isEmpty() )
       <div class="list-group">
         @foreach( $itens as $item )
-          <a href="{{ route('sistema.verLista',['id' => $item->id]) }}" class="list-group-item list-group-item-action border border-dark">{{ ucfirst($item->nome) }}</a>
+          <a href="{{ route('sistema.verItem',['id' => $item->id]) }}" class="list-group-item list-group-item-action border border-dark">{{ ucfirst($item->nome) }}</a>
         @endforeach
       </div>
     @else

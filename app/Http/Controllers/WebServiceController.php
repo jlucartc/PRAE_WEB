@@ -143,6 +143,24 @@ class WebServiceController extends Controller
 
         $item->secoes = Secoes::where('categoria_id',$item->id)->get();
 
+        $item->secoes->each(function($itemSecoes,$keySecoes){
+
+          $itemSecoes->paragrafos = Paragrafos::where('secao_id',$itemSecoes->id)->get();
+
+          $itemSecoes->paragrafos->each(function($itemParagrafos,$keyParagrafos){
+
+            $itemParagrafos->listas = Listas::where('paragrafo_id',$itemParagrafos->id)->get();
+
+            $itemParagrafos->listas->each(function($itemListas,$keyListas){
+
+              $itemListas->itens = Itens::where("lista_id",$itemListas->id)->get();
+
+            });
+
+          });
+
+        });
+
         $item->documentos = Documentos::where('categoria_id',$item->id)->get();
 
     });

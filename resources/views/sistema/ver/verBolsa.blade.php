@@ -102,6 +102,16 @@ PRAE - Bolsa
 
                 </div>
 
+                Descrição
+                <div class="input-group mb-3">
+
+                  <textarea id="campo-8" class="form-control" rows="10" name="descricao" readonly>{{ $bolsa->descricao }}</textarea>
+                  <div class="input-group-append">
+                    <button id="8" type="button" name="button" class="btn btn-primary destravar trava" title="desbloquear" ><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                  </div>
+
+                </div>
+
         </div>
         <div class="card-footer">
             <button class="btn btn-success mr-2" type="button" data-toggle="modal" data-target="#confirmarMudancas" name="button" title="salvar mudanças">Salvar mudanças</button><a href="{{ route('sistema.bolsas') }}" class="btn btn-primary mr-2" title="cancelar mudanças e voltar">Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecao" name="button" title="apagar bolsa">Apagar bolsa</button>

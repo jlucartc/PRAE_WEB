@@ -807,7 +807,7 @@ class SistemaController extends Controller
 
       $bolsa = Categorias::find($request->id)->delete();
 
-      return response()->route('sistema.bolsas');
+      return redirect()->route('sistema.bolsas');
 
   }
 
@@ -819,7 +819,7 @@ class SistemaController extends Controller
 
     $auxilio = Categorias::find($request->id)->delete();
 
-    return response()->route('sistema.auxilios');
+    return redirect()->route('sistema.auxilios');
 
   }
 
@@ -830,6 +830,8 @@ class SistemaController extends Controller
     ]);
 
     $servico = Categorias::find($request->id)->delete();
+
+    return redirect()->route('sistema.servicos');
 
   }
 
@@ -855,7 +857,7 @@ class SistemaController extends Controller
 
     $doc = Documentos::find($request->id);
 
-    $categoriaId = $doc->categoria_id;
+    $categoriaId = $doc->secao_id;
 
     //dd(storage_path('app/documentos_prae').'/'.$doc->rota);
 
@@ -863,7 +865,7 @@ class SistemaController extends Controller
 
     $doc->delete();
 
-    return redirect()->route('sistema.verCategoria',['id' => $categoriaId]);
+    return redirect()->route('sistema.verSecao',['id' => $categoriaId]);
 
   }
 
@@ -951,11 +953,11 @@ class SistemaController extends Controller
 
     $item = Itens::find($request->id);
 
-    $id = $item->categoria_id;
+    $id = $item->lista_id;
 
     $item->delete();
 
-    return redirect()->route('sistema.verCategoria',['id' => $id]);
+    return redirect()->route('sistema.verLista',['id' => $id]);
 
   }
 

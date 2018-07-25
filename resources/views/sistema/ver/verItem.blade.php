@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-      </form><a href="{{ route('sistema.verCategoria',['id' => $item->categoria_id ]) }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecaoItem" name="button">Apagar descrição</button>
+      </form><a href="{{ route('sistema.verLista',['id' => $item->lista_id ]) }}" class="btn btn-primary mr-2" >Cancelar</a><button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmarDelecaoItem" name="button">Apagar item</button>
         <div class="modal fade" id="confirmarDelecaoItem">
           <div class="modal-dialog">
             <div class="modal-content">
