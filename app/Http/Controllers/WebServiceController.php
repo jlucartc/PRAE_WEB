@@ -75,97 +75,47 @@ class WebServiceController extends Controller
 
   }
 
-  public function paragrafoAppWS($id){
+  public function categoriasAppWS($tipo){
 
-    $paragrafo = Paragrafos::find($id);
+    $categorias = Categorias::where('tipo_categoria',$tipo)->get();
 
-    $paragrafo->listas = Listas::where('paragrafo_id',$paragrafo->id)->get();
-
-    $paragrafo->listas->each(function($item,$key){
-
-        $item->itens = Itens::where('lista_id',$item->id)->get();
-
-    });
-
-    return response()->json($paragrafo);
+    return response()->json($categorias);
 
   }
 
-  public function secaoAppWS($id){
+  public function secoesAppWS($categoriaId){
 
-      $secao = Secoes::find($id);
+      $secoes = Secoes::where('categoria_id',$categoriaId)->get();
 
-      $secao->each(function($item,$key){
+      return response()->json($secoes);
 
-        $item->paragrafos = Paragrafos::where('secao_id',$item->id)->get();
+  }
+
+  public function paragrafosAppWS($secaoId){
+
+    $paragrafos = Paragrafos::where('secao_id',$secaoId)->get();
+
+    $paragrafos->each(function($item,$key){
+
+      $item->listas = Listas::where('paragrafo_id',$item->id)->get();
+
+      $item->listas->each(function($itemListas,$keyListas){
+
+        $itemListas->itens = Itens::where('lista_id',$itemListas->id)->get();
 
       });
 
-  }
-
-  public function auxiliosAppWS(Request $request){
-
-    $auxilios = Categorias::where('tipo_categoria',2)->get();
-
-    $auxilios->each(function($item,$key){
-
-        $item->secoes = Secoes::where('categoria_id',$item->id)->get();
-
-        $item->documentos = Documentos::where('categoria_id',$item->id)->get();
-
     });
 
-    return response()->json($auxilios);
+    return response()->json($paragrafos);
 
   }
 
-  public function servicosAppWS(Request $request){
+  public function documentosAppWS($secaoId){
 
-    $servicos = Categorias::where('tipo_categoria',3)->get();
+    $documentos = Documentos::where('secao_id',$secaoId)->get();
 
-    $servicos->each(function($item,$key){
-
-        $item->secoes = Secoes::where('categoria_id',$item->id)->get();
-
-        $item->documentos = Documentos::where('categoria_id',$item->id)->get();
-
-    });
-
-    return response()->json($servicos);
-
-  }
-
-  public function bolsasAppWS(Request $request){
-
-    $bolsas = Categorias::where('tipo_categoria',1)->get();
-
-    $bolsas->each(function($item,$key){
-
-        $item->secoes = Secoes::where('categoria_id',$item->id)->get();
-
-        $item->secoes->each(function($itemSecoes,$keySecoes){
-
-          $itemSecoes->paragrafos = Paragrafos::where('secao_id',$itemSecoes->id)->get();
-
-          $itemSecoes->paragrafos->each(function($itemParagrafos,$keyParagrafos){
-
-            $itemParagrafos->listas = Listas::where('paragrafo_id',$itemParagrafos->id)->get();
-
-            $itemParagrafos->listas->each(function($itemListas,$keyListas){
-
-              $itemListas->itens = Itens::where("lista_id",$itemListas->id)->get();
-
-            });
-
-          });
-
-        });
-
-        $item->documentos = Documentos::where('categoria_id',$item->id)->get();
-
-    });
-
-    return response()->json($bolsas);
+    return response()->json($documentos);
 
   }
 

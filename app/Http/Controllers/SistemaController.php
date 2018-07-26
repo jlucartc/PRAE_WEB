@@ -243,7 +243,7 @@ class SistemaController extends Controller
     $request->validate([
 
       'titulo' => 'required|string',
-      'texto' => 'required|string',
+      'texto' => 'nullable|string',
       'id' => 'required|numeric'
 
     ]);
@@ -987,7 +987,7 @@ class SistemaController extends Controller
     $request->validate([
 
       'titulo' => 'required|string',
-      'texto' => 'required|string'
+      'texto' => 'nullable|string'
 
     ]);
 
