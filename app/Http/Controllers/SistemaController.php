@@ -1299,7 +1299,7 @@ class SistemaController extends Controller
     $request->validate([
 
       'nome' => 'required|string',
-      'descricao' => 'required|string'
+      'descricao' => 'nullable|string'
 
     ]);
 
