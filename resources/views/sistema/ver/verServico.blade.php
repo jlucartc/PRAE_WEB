@@ -156,7 +156,7 @@ PRAE - Servico
     @if( !$documentos->isEmpty() )
       <div class="list-group">
         @foreach( $documentos as $documento )
-      <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('sistema.baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2" title="baixar arquivo" >Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoDocumento{{ $documento->id }}" title="apagar arquivo">Apagar arquivo</button> </div>      </a>
+      <a class="list-group-item border border-dark">{{ ucfirst($documento->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('baixarDocumento',['id' => $documento->id]) }}" method="GET"><button class="btn btn-success mr-2" title="baixar arquivo" >Baixar arquivo</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoDocumento{{ $documento->id }}" title="apagar arquivo">Apagar arquivo</button> </div>      </a>
           <div class="modal fade" id="confirmarDelecaoDocumento{{ $documento->id }}">
               <div class="modal-dialog">
                   <div class="modal-content">

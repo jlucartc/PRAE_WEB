@@ -111,10 +111,12 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   //Route::post('salvarDivisao','SistemaController@salvarDivisao')->name('sistema.salvarDivisao');
   Route::post('salvarItem','SistemaController@salvarItem')->name('sistema.salvarItem');
   /// Baixar
-  Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('sistema.baixarDocumento');
-  Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('sistema.baixarMapa');
 
 });
+
+Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('baixarDocumento');
+Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('baixarMapa');
+
 
 Route::post('app/ws/baixarDocumento','WebServiceController@salvarDescricao')->middleware('CORS')->name('ws.baixarDocumentoAppWS');
 Route::get('feed','WebServiceController@feed')->name('ws.feed');
@@ -126,6 +128,6 @@ Route::get('app/ws/secoes/{categoriaId}','WebServiceController@secoesAppWS')->mi
 Route::get('app/ws/paragrafos/{secaoId}','WebServiceController@paragrafosAppWS')->middleware('CORS')->name('ws.paragrafosAppWS');
 Route::get('app/ws/lista/{paragrafoId}','WebServiceController@listasAppWS')->middleware('CORS')->name('ws.listaAppWS');
 Route::get('app/ws/itens/{listaId}','WebServiceController@itensAppWS')->middleware('CORS')->name('ws.itensAppWS');
-Route::get('app/ws/documentos/{secaoId}','WebServiceController@documentosAppWS')->middleware('CORS')->name('ws.documentosAppWS');
+Route::get('app/ws/documentos/{categoriaId}','WebServiceController@documentosAppWS')->middleware('CORS')->name('ws.documentosAppWS');
 Route::get('app/ws/mapas','WebServiceController@mapasAppWS')->middleware('CORS')->name('ws.mapasAppWS');
 Route::get('mostrarMapa/{id}','WebServiceController@mostrarMapaAppWS')->middleware('CORS')->name('ws.mostrarMapaAppWS');

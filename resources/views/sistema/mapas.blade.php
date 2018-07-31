@@ -12,7 +12,7 @@ PRAE - Mapas
     @if( !$mapas->isEmpty() )
       <div class="list-group">
         @foreach( $mapas as $mapa )
-          <a class="list-group-item border border-dark">{{ ucfirst($mapa->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('sistema.baixarMapa',['id' => $mapa->id]) }}" method="GET"><button type="submit" class="btn btn-success mr-2">Baixar mapa</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoMapa{{ $mapa->id }}" >Apagar mapa</button> </div>      </a>
+          <a class="list-group-item border border-dark">{{ ucfirst($mapa->nome) }}    <div class="d-inline float-right"> <form class="form-inline d-inline" action="{{ route('baixarMapa',['id' => $mapa->id]) }}" method="GET"><button type="submit" class="btn btn-success mr-2">Baixar mapa</button></form> <button class="btn btn-danger" type="button" name="button" data-toggle="modal" data-target="#confirmarDelecaoMapa{{ $mapa->id }}" >Apagar mapa</button> </div>      </a>
           <div class="modal fade" id="confirmarDelecaoMapa{{ $mapa->id }}">
               <div class="modal-dialog">
                   <div class="modal-content">

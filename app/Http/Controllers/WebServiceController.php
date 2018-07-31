@@ -111,9 +111,9 @@ class WebServiceController extends Controller
 
   }
 
-  public function documentosAppWS($secaoId){
+  public function documentosAppWS($categoriaId){
 
-    $documentos = Documentos::where('secao_id',$secaoId)->get();
+    $documentos = Documentos::where('categoria_id',$categoriaId)->get();
 
     return response()->json($documentos);
 
