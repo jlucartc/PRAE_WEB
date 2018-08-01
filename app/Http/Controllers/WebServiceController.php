@@ -17,6 +17,11 @@ use App\ReceiverID;
 use App\Secoes;
 use App\Listas;
 use App\Paragrafos;
+use App\Emails;
+use App\Mail\CancelarNotificacoesEmail;
+use App\Mail\ConfirmarCadastroEmail;
+use App\Mail\EmailNotificacao;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -140,6 +145,45 @@ class WebServiceController extends Controller
     $nome = Mapas::find($id)->nome;
 
     return response()->file(storage_path()."/app/mapas_prae/".$nome);
+
+  }
+
+  public function cadastrarEmail($email){
+
+      $nEmail = new Emails();
+
+      $nEmail->email = $email;
+      $nEmail->token = str_random(40);
+
+      $nEmail->save();
+
+      Mail::to($email)->send(new ConfirmarCadastroEmail($nEmail));
+
+  }
+
+  public function notificarEmails(Request $request){
+
+    $emails = Emails::all();
+
+    $noticia = Noticias::find($request->noticiaId);
+
+    $emails->each(function($item,$key){
+
+      Mail::to($item->email)->send(new EmailNotificacao($noticia,$item));
+
+    });
+
+    Mail::to("praeapp.teste@gmail.com")->send(new EmailNotificacao($noticia));
+
+  }
+
+  public function cancelarNotificacoesEmail(Request $request){
+
+    $nEmail = Emails::where("token",$request->token)->first();
+
+    Mail::to($nEmail->email)->send(new CancelarNotificacoesEmail($nEmail));
+
+    $nEmail->delete();
 
   }
 
