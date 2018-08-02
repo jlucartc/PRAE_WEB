@@ -132,6 +132,6 @@ Route::get('app/ws/itens/{listaId}','WebServiceController@itensAppWS')->middlewa
 Route::get('app/ws/documentos/{categoriaId}','WebServiceController@documentosAppWS')->middleware('CORS')->name('ws.documentosAppWS');
 Route::get('app/ws/mapas','WebServiceController@mapasAppWS')->middleware('CORS')->name('ws.mapasAppWS');
 Route::post('app/ws/notificarEmails','WebServiceController@notificarEmails')->middleware('CORS')->name('ws.notificarEmails');
-Route::get('app/ws/cadastrarEmail','WebServiceController@cadastrarEmail')->middleware('CORS')->name('ws.cadastrarEmail');
+Route::get('app/ws/cadastrarEmail/{email}','WebServiceController@cadastrarEmail')->middleware('CORS')->name('ws.cadastrarEmail');
 Route::post('app/ws/cancelarNotificacoesEmail','WebServiceController@cancelarNotificacoesEmail')->middleware('CORS')->name('ws.cancelarNotificacoesEmail');
 Route::get('mostrarMapa/{id}','WebServiceController@mostrarMapaAppWS')->middleware('CORS')->name('ws.mostrarMapaAppWS');
