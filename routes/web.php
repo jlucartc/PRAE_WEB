@@ -117,8 +117,6 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
 Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('baixarDocumento');
 Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('baixarMapa');
 
-
-
 Route::get('feed','WebServiceController@feed')->name('ws.feed');
 Route::post('app/ws/baixarDocumento','WebServiceController@salvarDescricao')->middleware('CORS')->name('ws.baixarDocumentoAppWS');
 Route::get('app/ws/compromissos','WebServiceController@compromissosAppWS')->name('ws.compromissosAppWS');

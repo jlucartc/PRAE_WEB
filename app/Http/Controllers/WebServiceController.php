@@ -76,6 +76,14 @@ class WebServiceController extends Controller
 
     //$noticias = $noticias->slice(($noticias->count()-10));
 
+    $noticias->each(function($item,$key){
+
+      unset($item->token);
+      unset($item->created_at);
+      unset($item->updated_at);
+
+    });
+
     return response()->json($noticias);
 
   }
@@ -84,6 +92,13 @@ class WebServiceController extends Controller
 
     $categorias = Categorias::where('tipo_categoria',$tipo)->get();
 
+    $categorias->each(function($item,$key){
+
+      unset($item->created_at);
+      unset($item->updated_at);
+
+    });
+
     return response()->json($categorias);
 
   }
@@ -91,6 +106,13 @@ class WebServiceController extends Controller
   public function secoesAppWS($categoriaId){
 
       $secoes = Secoes::where('categoria_id',$categoriaId)->get();
+
+      $categorias->each(function($item,$key){
+
+        unset($item->created_at);
+        unset($item->updated_at);
+
+      });
 
       return response()->json($secoes);
 
@@ -102,9 +124,15 @@ class WebServiceController extends Controller
 
     $paragrafos->each(function($item,$key){
 
+      unset($item->created_at);
+      unset($item->updated_at);
+
       $item->listas = Listas::where('paragrafo_id',$item->id)->get();
 
       $item->listas->each(function($itemListas,$keyListas){
+
+        unset($itemListas->created_at);
+        unset($itemListas->updated_at);
 
         $itemListas->itens = Itens::where('lista_id',$itemListas->id)->get();
 
@@ -120,6 +148,13 @@ class WebServiceController extends Controller
 
     $documentos = Documentos::where('categoria_id',$categoriaId)->get();
 
+    $documentoss->each(function($item,$key){
+
+      unset($item->created_at);
+      unset($item->updated_at);
+
+    });
+
     return response()->json($documentos);
 
   }
@@ -128,6 +163,13 @@ class WebServiceController extends Controller
 
     $compromissos = Compromissos::all();
 
+    $compromissos->each(function($item,$key){
+
+      unset($item->created_at);
+      unset($item->updated_at);
+
+    });
+
     return response()->json($compromissos);
 
   }
@@ -135,6 +177,13 @@ class WebServiceController extends Controller
   public function mapasAppWS(Request $request){
 
     $mapas = Mapas::all();
+
+    $mapas->each(function($item,$key){
+
+      unset($item->created_at);
+      unset($item->updated_at);
+
+    });
 
     return response()->json($mapas);
 
@@ -161,21 +210,24 @@ class WebServiceController extends Controller
 
   }
 
-  public function notificarEmails(Request $request){
+  public function notificarEmails($noticiaId){
 
     $emails = Emails::all();
 
-    $noticia = Noticias::find($request->noticiaId);
+    foreach($emails as $email){
 
-    $emails->each(function($item,$key){
+      $noticia = Noticias::find($noticiaId);
 
-      Mail::to($item->email)->send(new EmailNotificacao($noticia,$item));
+      Mail::to($email->email)->send(new EmailNotificacao($noticia,$email));
 
-    });
+    }
 
-    Mail::to("praeapp.teste@gmail.com")->send(new EmailNotificacao($noticia));
+      //Mail::to("praeapp.teste@gmail.com")->send(new EmailNotificacao($noticia));
+
+    return;
 
   }
+
 
   public function cancelarNotificacoesEmail(Request $request){
 

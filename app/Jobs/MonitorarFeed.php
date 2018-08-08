@@ -15,6 +15,7 @@ use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
 use FCM;
+use App\Http\Controllers\WebServiceController;
 
 class MonitorarFeed implements ShouldQueue
 {
@@ -63,7 +64,21 @@ class MonitorarFeed implements ShouldQueue
 
           $noticia->titulo = $item['title'];
           $noticia->guid = $item['guid'];
+          $noticia->token = str_random(40);
           $status = $noticia->save();
+
+          while($status == false){
+
+            $noticia->titulo = $item['title'];
+            $noticia->guid = $item['guid'];
+            $noticia->token = str_random(40);
+            $status = $noticia->save();
+
+          }
+
+          $wsController = new WebServiceController();
+
+          $wsController->notificarEmails($noticia->id);
 
           /*$optionBuilder = new OptionsBuilder();
 
