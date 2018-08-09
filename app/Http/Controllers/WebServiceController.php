@@ -216,6 +216,8 @@ class WebServiceController extends Controller
 
     foreach($emails as $email){
 
+      Log::info("Notificando emails!");
+
       $noticia = Noticias::find($noticiaId);
 
       Mail::to($email->email)->send(new EmailNotificacao($noticia,$email));
@@ -223,8 +225,6 @@ class WebServiceController extends Controller
     }
 
       //Mail::to("praeapp.teste@gmail.com")->send(new EmailNotificacao($noticia));
-
-    return;
 
   }
 

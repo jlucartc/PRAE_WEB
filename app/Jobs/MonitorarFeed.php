@@ -56,9 +56,21 @@ class MonitorarFeed implements ShouldQueue
 
       $itens = array_reverse($itens);
 
+      $wsController = new WebServiceController();
+
+      Log::info("Itens: ".count($itens));
+
+      $c = 0;
+
       foreach($itens as $item){
 
+        $c = $c+1;
+
+        Log::info($item['guid']);
+
         if(Noticias::where('guid',$item['guid'])->get()->count() == 0){
+
+          Log::info($c);
 
           $noticia = new Noticias;
 
@@ -69,14 +81,12 @@ class MonitorarFeed implements ShouldQueue
 
           while($status == false){
 
-            $noticia->titulo = $item['title'];
-            $noticia->guid = $item['guid'];
             $noticia->token = str_random(40);
             $status = $noticia->save();
 
           }
 
-          $wsController = new WebServiceController();
+          Log::info("Notificando emails!");
 
           $wsController->notificarEmails($noticia->id);
 

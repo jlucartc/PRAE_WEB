@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Log;
 
 class EmailNotificacao extends Mailable
 {
@@ -35,6 +36,8 @@ class EmailNotificacao extends Mailable
      */
     public function build()
     {
+
+        Log::info("Enviando emails!");
         return $this->view('sistema.emails.emailNotificacao');
     }
 }
