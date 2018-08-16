@@ -107,7 +107,7 @@ class WebServiceController extends Controller
 
       $secoes = Secoes::where('categoria_id',$categoriaId)->get();
 
-      $categorias->each(function($item,$key){
+      $secoes->each(function($item,$key){
 
         unset($item->created_at);
         unset($item->updated_at);
@@ -148,7 +148,7 @@ class WebServiceController extends Controller
 
     $documentos = Documentos::where('categoria_id',$categoriaId)->get();
 
-    $documentoss->each(function($item,$key){
+    $documentos->each(function($item,$key){
 
       unset($item->created_at);
       unset($item->updated_at);
