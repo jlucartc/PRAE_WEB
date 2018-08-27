@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmailsTable extends Migration
+class CreateAvisosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateEmailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emails', function (Blueprint $table) {
+        Schema::create('avisos', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('email');
-            $table->string('token',40)->unique();
+            $table->text('titulo');
+            $table->text('mensagem')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateEmailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emails');
+        Schema::dropIfExists('avisos');
     }
 }

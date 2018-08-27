@@ -18,6 +18,7 @@
     <a href="{{ route('sistema.compromissos')}}" class="nav-item nav-link">Atividades</a>
     <a href="{{ route('sistema.mapas') }}" class="nav-item nav-link">Mapas</a>
     <a href="{{ route('sistema.usuarios') }}" class="nav-item nav-link">Usuários</a>
+    <a href="{{ route('sistema.avisos')}}" class="nav-item nav-link">Avisos</a>
     {{-- <a href="{{ route('sistema.coordenadorias') }}" class="nav-item nav-link">Coordenadorias</a> --}}
     <a href="{{ route('logout') }}" class="nav-item nav-link ml-5">Logout</a>
   </div>

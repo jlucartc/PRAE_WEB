@@ -27,6 +27,7 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   Route::get('bolsas','SistemaController@bolsas')->name('sistema.bolsas');
   Route::get('auxilios','SistemaController@auxilios')->name('sistema.auxilios');
   Route::get('servicos','SistemaController@servicos')->name('sistema.servicos');
+  Route::get('avisos','SistemaController@avisos')->name('sistema.avisos');
   /*Route::get('categorias','SistemaController@categorias')->name('sistema.categorias');*/
   Route::get('compromissos','SistemaController@compromissos')->name('sistema.compromissos');
   Route::get('mapas','SistemaController@mapas')->name('sistema.mapas');
@@ -35,6 +36,7 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   Route::get('adicionarUsuario','SistemaController@adicionarUsuario')->name('sistema.adicionarUsuario');
   //Route::get('adicionarCategoria','SistemaController@adicionarCategoria')->name('sistema.adicionarCategoria');
   Route::get('adicionarBolsa','SistemaController@adicionarBolsa')->name('sistema.adicionarBolsa');
+  Route::get('adicionarAviso','SistemaController@adicionarAviso')->name('sistema.adicionarAviso');
   Route::get('adicionarAuxilio','SistemaController@adicionarAuxilio')->name('sistema.adicionarAuxilio');
   Route::get('adicionarServico','SistemaController@adicionarServico')->name('sistema.adicionarServico');
   Route::get('adicionarSecao/{id}','SistemaController@adicionarSecao')->name('sistema.adicionarSecao');
@@ -52,6 +54,7 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   Route::post('confirmarCadastroUsuario','SistemaController@confirmarCadastroUsuario')->name('sistema.confirmarCadastroUsuario');
   //Route::post('confirmarCadastroCategoria','SistemaController@confirmarCadastroCategoria')->name('sistema.confirmarCadastroCategoria');
   Route::post('confirmarCadastroBolsa','SistemaController@confirmarCadastroBolsa')->name('sistema.confirmarCadastroBolsa');
+  Route::post('confirmarCadastroAviso','SistemaController@confirmarCadastroAviso')->name('sistema.confirmarCadastroAviso');
   Route::post('confirmarCadastroAuxilio','SistemaController@confirmarCadastroAuxilio')->name('sistema.confirmarCadastroAuxilio');
   Route::post('confirmarCadastroServico','SistemaController@confirmarCadastroServico')->name('sistema.confirmarCadastroServico');
   Route::post('confirmarCadastroSecao','SistemaController@confirmarCadastroSecao')->name('sistema.confirmarCadastroSecao');
@@ -69,6 +72,7 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   Route::get('verUsuario/{id}','SistemaController@verUsuario')->name('sistema.verUsuario');
   //Route::get('verCategoria/{id}','SistemaController@verCategoria')->name('sistema.verCategoria');
   Route::get('verBolsa/{id}','SistemaController@verBolsa')->name('sistema.verBolsa');
+  Route::get('verAviso/{id}','SistemaController@verAviso')->name('sistema.verAviso');
   Route::get('verAuxilio/{id}','SistemaController@verAuxilio')->name('sistema.verAuxilio');
   Route::get('verServico/{id}','SistemaController@verServico')->name('sistema.verServico');
   Route::get('verSecao/{id}','SistemaController@verSecao')->name('sistema.verSecao');
@@ -84,6 +88,7 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   Route::post('deletarUsuario','SistemaController@deletarUsuario')->name('sistema.deletarUsuario');
   //Route::post('deletarCategoria','SistemaController@deletarCategoria')->name('sistema.deletarCategoria');
   Route::post('deletarBolsa','SistemaController@deletarBolsa')->name('sistema.deletarBolsa');
+  Route::post('deletarAviso','SistemaController@deletarAviso')->name('sistema.deletarAviso');
   Route::post('deletarAuxilio','SistemaController@deletarAuxilio')->name('sistema.deletarAuxilio');
   Route::post('deletarServico','SistemaController@deletarServico')->name('sistema.deletarServico');
   Route::post('deletarSecao','SistemaController@deletarSecao')->name('sistema.deletarSecao');
@@ -100,6 +105,7 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
   Route::post('salvarUsuario','SistemaController@salvarUsuario')->name('sistema.salvarUsuario');
   //Route::post('salvarCategoria','SistemaController@salvarCategoria')->name('sistema.salvarCategoria');
   Route::post('salvarBolsa','SistemaController@salvarBolsa')->name('sistema.salvarBolsa');
+  Route::post('salvarAviso','SistemaController@salvarAviso')->name('sistema.salvarAviso');
   Route::post('salvarAuxilio','SistemaController@salvarAuxilio')->name('sistema.salvarAuxilio');
   Route::post('salvarServico','SistemaController@salvarServico')->name('sistema.salvarServico');
   Route::post('salvarSecao','SistemaController@salvarSecao')->name('sistema.salvarSecao');

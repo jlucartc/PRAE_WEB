@@ -17,6 +17,7 @@ use App\ReceiverID;
 use App\Listas;
 use App\Paragrafos;
 use App\Secoes;
+use App\Avisos;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use HTTP_Request2;
@@ -25,6 +26,14 @@ use HTTP_Request2;
 
 class SistemaController extends Controller
 {
+
+  public function avisos(){
+
+    $avisos = Avisos::all();
+
+    return view('sistema.avisos',['avisos' => $avisos]);
+
+  }
 
   public function usuarios(){
 
@@ -91,6 +100,12 @@ class SistemaController extends Controller
   }
 
   /// Adicionar
+
+  public function adicionarAviso(){
+
+    return view("sistema.adicionar.adicionarAviso");
+
+  }
 
   public function adicionarSecao($id){
 
@@ -218,6 +233,26 @@ class SistemaController extends Controller
 
   /// Confirmar cadastro
 
+  public function confirmarCadastroAviso(Request $request){
+
+    $request->validate([
+
+      'titulo' => 'required|string',
+      'mensagem' => 'nullable|string'
+
+    ]);
+
+    $aviso = new Avisos;
+
+    $aviso->titulo = $request->titulo;
+    $aviso->mensagem = $request->mensagem;
+
+    $aviso->save();
+
+    return redirect()->back()->with('mensagem','Aviso adicionado com sucesso');
+
+  }
+
   public function confirmarCadastroSecao(Request $request){
 
     $request->validate([
@@ -234,7 +269,7 @@ class SistemaController extends Controller
 
     $secao->save();
 
-    return redirect()->back()->with('mensagem','Seção adicionada com sucesso')->with('mensagem','Seção adicionada com sucesso!');
+    return redirect()->back()->with('mensagem','Seção adicionada com sucesso');
 
   }
 
@@ -596,6 +631,14 @@ class SistemaController extends Controller
 
   /// Ver
 
+  public function verAviso($id){
+
+    $aviso = Avisos::find($id);
+
+    return view('sistema.ver.verAviso',['aviso' => $aviso]);
+
+  }
+
   public function verSecao($id){
 
     $secao = Secoes::find($id);
@@ -736,6 +779,16 @@ class SistemaController extends Controller
   }
 
   /// Deletar
+
+  public function deletarAviso(Request $request){
+
+    $aviso = Avisos::find($request->id);
+
+    $aviso->delete();
+
+    return redirect()->route('sistema.avisos');
+
+  }
 
   public function deletarSecao(Request $request){
 
@@ -962,6 +1015,25 @@ class SistemaController extends Controller
   }
 
   /// Salvar
+
+  public function salvarAviso(Request $request){
+
+      $request->validate([
+
+        'titulo' => 'required|string',
+        'mensagem' => 'nullable|string'
+
+      ]);
+
+      $aviso = Avisos::find($request->id);
+
+      $aviso->titulo = $request->titulo;
+      $aviso->mensagem = $request->mensagem;
+
+      $aviso->save();
+
+      return redirect()->route('sistema.verAviso',['id' => $request->id]);
+  }
 
   public function salvarSecao(Request $request){
 
