@@ -124,6 +124,7 @@ Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('ba
 Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('baixarMapa');
 
 Route::get('feed','WebServiceController@feed')->name('ws.feed');
+Route::get('app/ws/avisos','WebServiceController@avisosAppWS')->middleware('CORS')->name('ws.avisosAppWS');
 Route::post('app/ws/baixarDocumento','WebServiceController@salvarDescricao')->middleware('CORS')->name('ws.baixarDocumentoAppWS');
 Route::get('app/ws/compromissos','WebServiceController@compromissosAppWS')->name('ws.compromissosAppWS');
 Route::get('app/ws/noticias','WebServiceController@noticiasAppWS')->middleware('CORS')->name('ws.noticiasAppWS');

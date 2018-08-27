@@ -18,6 +18,7 @@ use App\Secoes;
 use App\Listas;
 use App\Paragrafos;
 use App\Emails;
+use App\Avisos;
 use App\Mail\CancelarNotificacoesEmail;
 use App\Mail\ConfirmarCadastroEmail;
 use App\Mail\EmailNotificacao;
@@ -186,6 +187,21 @@ class WebServiceController extends Controller
     });
 
     return response()->json($mapas);
+
+  }
+
+  public function avisosAppWS(Request $request){
+
+    $avisos = Avisos::all();
+
+    $avisos->each(function($item,$key){
+
+        unset($item->created_at);
+        unset($item->updated_at);
+
+    });
+
+    return response()->json($avisos);
 
   }
 
