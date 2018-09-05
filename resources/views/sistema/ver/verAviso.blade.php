@@ -45,11 +45,29 @@
                 Mensagem
                 <div class="input-group mb-3">
 
-                  <textarea id="campo-8" class="form-control" rows="10" name="mensagem" readonly>{{ $aviso->mensagem }}</textarea>
+                  <textarea id="campo-2" class="form-control" rows="10" name="mensagem" readonly>{{ $aviso->mensagem }}</textarea>
                   <div class="input-group-append">
-                    <button id="8" type="button" name="button" class="btn btn-primary destravar trava" title="desbloquear" ><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                    <button id="2" type="button" name="button" class="btn btn-primary destravar trava" title="desbloquear" ><span class="fas fa-unlock" style="pointer-events: none"></span></button>
                   </div>
 
+                </div>
+
+                Título do link
+                <div class="input-group mb-3">
+
+                    <input id="campo-3" class="form-control" type="text" name="titulo_link" value="{{ $aviso->titulo_link }}" readonly>
+                    <div class="input-group-append">
+                      <button id="3" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span</button>
+                    </div>
+                </div>
+
+                Link
+                <div class="input-group mb-3">
+
+                    <input id="campo-4" class="form-control" type="text" name="link" value="{{ $aviso->link }}" readonly>
+                    <div class="input-group-append">
+                      <button id="4" class="btn btn-primary destravar trava" type="button" name="button" title="desbloquear"><span class="fas fa-unlock" style="pointer-events: none"></span</button>
+                    </div>
                 </div>
 
         </div>

@@ -17,6 +17,8 @@ class CreateAvisosTable extends Migration
             $table->increments('id');
             $table->text('titulo');
             $table->text('mensagem')->nullable();
+            $table->text('titulo_link')->nullable();
+            $table->text('link')->nullable();
             $table->timestamps();
         });
     }

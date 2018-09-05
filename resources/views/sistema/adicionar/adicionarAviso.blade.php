@@ -27,6 +27,8 @@
               {{ csrf_field() }}
               <input class="form-control mb-3" type="text" name="titulo" value="" placeholder="Título">
               <textarea class="form-control mb-3" name="mensagem" rows="8" cols="80" placeholder="Mensagem"></textarea>
+              <input class="form-control mb-3" type="text" name="titulo_link" value="" placeholder="Título do link">
+              <input class="form-control mb-3" type="text" name="link" value="" placeholder="Link">
         </div>
         <div class="card-footer">
           <button type="submit" class="btn btn-success mr-2" name="button" title="confirmar cadastro">Cadastrar</button><a href="{{ route('sistema.avisos') }}" class="btn btn-danger" name="button" title="cancelar cadastro">Cancelar</a>

@@ -27,6 +27,8 @@ use HTTP_Request2;
 class SistemaController extends Controller
 {
 
+  private $site = "http://prae.ufc.br";
+
   public function avisos(){
 
     $avisos = Avisos::all();
@@ -238,7 +240,9 @@ class SistemaController extends Controller
     $request->validate([
 
       'titulo' => 'required|string',
-      'mensagem' => 'nullable|string'
+      'mensagem' => 'nullable|string',
+      'titulo_link' => 'nullable|string',
+      'link' => 'nullable|string'
 
     ]);
 
@@ -246,6 +250,8 @@ class SistemaController extends Controller
 
     $aviso->titulo = $request->titulo;
     $aviso->mensagem = $request->mensagem;
+    (empty($request->titulo_link)) ? $aviso->titulo_link = "Ir para o site" : $aviso->titulo_link = $request->titulo_link;
+    (empty($request->link)) ? $aviso->link = $this->site : $aviso->link = $request->link;
 
     $aviso->save();
 
@@ -1021,7 +1027,9 @@ class SistemaController extends Controller
       $request->validate([
 
         'titulo' => 'required|string',
-        'mensagem' => 'nullable|string'
+        'mensagem' => 'nullable|string',
+        'titulo_link' => 'nullable|string',
+        'link' => 'nullable|string'
 
       ]);
 
@@ -1029,6 +1037,8 @@ class SistemaController extends Controller
 
       $aviso->titulo = $request->titulo;
       $aviso->mensagem = $request->mensagem;
+      $aviso->titulo_link = (empty($request->titulo_link)) ? "Ir para o site" : $request->titulo_link;
+      $aviso->link = (empty($request->link)) ? $this->site : $request->link;
 
       $aviso->save();
 
