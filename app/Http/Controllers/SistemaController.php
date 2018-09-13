@@ -1162,7 +1162,7 @@ class SistemaController extends Controller
     $auxilio->numero = $request->numero;
     $auxilio->bairro = $request->bairro;
 
-    $bolsa->save();
+    $auxilio->save();
 
     return redirect()->route('sistema.verAuxilio',['id' => $auxilio->id]);
 

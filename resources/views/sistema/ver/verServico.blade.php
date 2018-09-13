@@ -101,6 +101,15 @@ PRAE - Servico
                   </div>
 
                 </div>
+                Descrição
+                <div class="input-group mb-3">
+
+                  <textarea id="campo-8" class="form-control" rows="10" name="descricao" readonly>{{ $servico->descricao }}</textarea>
+                  <div class="input-group-append">
+                    <button id="8" type="button" name="button" class="btn btn-primary destravar trava" title="desbloquear" ><span class="fas fa-unlock" style="pointer-events: none"></span></button>
+                  </div>
+
+                </div>
 
         </div>
         <div class="card-footer">
