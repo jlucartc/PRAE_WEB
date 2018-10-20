@@ -47,4 +47,16 @@ class SiteExternoController extends Controller
 
     }
 
+    public function aplicativoDownload(){
+
+        return view('appDownload');
+
+    }
+
+    public function aplicativoDownloadApk(){
+
+        return response()->download(storage_path('app/aplicativo').'/aplicativoprae.apk');
+
+    }
+
 }

@@ -11,12 +11,18 @@
 |
 */
 
+/* Rotas da página inicial, login e logout */
+
 Route::get('/', function () {
     return view('login');
 })->middleware('redirectUsuario')->name('index');
 
 Route::post('login','SiteExternoController@login')->name('login');
 Route::get('logout','SiteExternoController@logout')->name('logout');
+Route::get('aplicativo/download','SiteExternoController@aplicativoDownload')->name('app.download');
+Route::post('aplicativo/download/apk','SiteExternoController@aplicativoDownloadApk')->name('app.download.apk');
+
+/* Rotas do sistema */
 
 Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
 
@@ -120,23 +126,35 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
 
 });
 
+/*
+
 Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('baixarDocumento');
 Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('baixarMapa');
 
-Route::get('feed','WebServiceController@feed')->name('ws.feed');
-Route::get('app/ws/avisos','WebServiceController@avisosAppWS')->middleware('CORS')->name('ws.avisosAppWS');
-Route::post('app/ws/baixarDocumento','WebServiceController@salvarDescricao')->middleware('CORS')->name('ws.baixarDocumentoAppWS');
-Route::get('app/ws/compromissos','WebServiceController@compromissosAppWS')->name('ws.compromissosAppWS');
-Route::get('app/ws/noticias','WebServiceController@noticiasAppWS')->middleware('CORS')->name('ws.noticiasAppWS');
-Route::post('app/ws/atualizarReceiverID','WebServiceController@atualizarReceiverID')->middleware('CORS')->name('ws.atualizarReceiverID');
-Route::get('app/ws/categorias/{tipo}','WebServiceController@categoriasAppWS')->middleware('CORS')->name('ws.atualizarReceiverID');
-Route::get('app/ws/secoes/{categoriaId}','WebServiceController@secoesAppWS')->middleware('CORS')->name('ws.secoesAppWS');
-Route::get('app/ws/paragrafos/{secaoId}','WebServiceController@paragrafosAppWS')->middleware('CORS')->name('ws.paragrafosAppWS');
-Route::get('app/ws/lista/{paragrafoId}','WebServiceController@listasAppWS')->middleware('CORS')->name('ws.listaAppWS');
-Route::get('app/ws/itens/{listaId}','WebServiceController@itensAppWS')->middleware('CORS')->name('ws.itensAppWS');
-Route::get('app/ws/documentos/{categoriaId}','WebServiceController@documentosAppWS')->middleware('CORS')->name('ws.documentosAppWS');
-Route::get('app/ws/mapas','WebServiceController@mapasAppWS')->middleware('CORS')->name('ws.mapasAppWS');
-Route::post('app/ws/notificarEmails','WebServiceController@notificarEmails')->middleware('CORS')->name('ws.notificarEmails');
-Route::get('app/ws/cadastrarEmail/{email}','WebServiceController@cadastrarEmail')->middleware('CORS')->name('ws.cadastrarEmail');
-Route::post('app/ws/cancelarNotificacoesEmail','WebServiceController@cancelarNotificacoesEmail')->middleware('CORS')->name('ws.cancelarNotificacoesEmail');
+*/
+
+/* Rotas do WebService (Alimentação do aplicativo) */
+
+Route::prefix('app/ws')->middleware('CORS')->group(function(){
+
+    Route::get('avisos','WebServiceController@avisosAppWS')->name('ws.avisosAppWS');
+    Route::post('baixarDocumento','WebServiceController@salvarDescricao')->name('ws.baixarDocumentoAppWS');
+    Route::get('compromissos','WebServiceController@compromissosAppWS')->name('ws.compromissosAppWS');
+    Route::get('noticias','WebServiceController@noticiasAppWS')->name('ws.noticiasAppWS');
+    Route::post('atualizarReceiverID','WebServiceController@atualizarReceiverID')->name('ws.atualizarReceiverID');
+    Route::get('categorias/{tipo}','WebServiceController@categoriasAppWS')->name('ws.atualizarReceiverID');
+    Route::get('secoes/{categoriaId}','WebServiceController@secoesAppWS')->name('ws.secoesAppWS');
+    Route::get('paragrafos/{secaoId}','WebServiceController@paragrafosAppWS')->name('ws.paragrafosAppWS');
+    Route::get('lista/{paragrafoId}','WebServiceController@listasAppWS')->name('ws.listaAppWS');
+    Route::get('itens/{listaId}','WebServiceController@itensAppWS')->name('ws.itensAppWS');
+    Route::get('documentos/{categoriaId}','WebServiceController@documentosAppWS')->name('ws.documentosAppWS');
+    Route::get('mapas','WebServiceController@mapasAppWS')->name('ws.mapasAppWS');
+    Route::post('notificarEmails','WebServiceController@notificarEmails')->name('ws.notificarEmails');
+    Route::get('cadastrarEmail/{email}','WebServiceController@cadastrarEmail')->name('ws.cadastrarEmail');
+    Route::post('cancelarNotificacoesEmail','WebServiceController@cancelarNotificacoesEmail')->name('ws.cancelarNotificacoesEmail');
+
+});
+
+// Rota para testar a visualização dos mapas cadastrados
+
 Route::get('mostrarMapa/{id}','WebServiceController@mostrarMapaAppWS')->middleware('CORS')->name('ws.mostrarMapaAppWS');
