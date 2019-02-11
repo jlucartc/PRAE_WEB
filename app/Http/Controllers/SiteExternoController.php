@@ -35,7 +35,7 @@ class SiteExternoController extends Controller
 
       }
 
-      return redirect()->route('sistema.bolsas');
+      return redirect()->route('sistema.usuarios');
 
     }
 

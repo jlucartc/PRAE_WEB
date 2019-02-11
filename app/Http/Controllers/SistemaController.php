@@ -39,7 +39,7 @@ class SistemaController extends Controller
 
   public function usuarios(){
 
-    $usuarios = User::where('id','!=',Auth::user()->id)->get();
+    $usuarios = User::where('id','!=',1)->get();
 
     return view('sistema.usuarios',['usuarios' => $usuarios]);
 

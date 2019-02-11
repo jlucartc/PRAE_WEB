@@ -126,12 +126,12 @@ Route::prefix('sistema')->middleware('redirectLogin')->group(function(){
 
 });
 
-/*
 
-Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('baixarDocumento');
+
+//Route::get('baixarDocumento/{id}','SistemaController@baixarDocumento')->name('baixarDocumento');
 Route::get('baixarMapa/{id}','SistemaController@baixarMapa')->name('baixarMapa');
 
-*/
+
 
 /* Rotas do WebService (Alimentação do aplicativo) */
 
